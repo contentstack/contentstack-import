@@ -1,0 +1,12 @@
+.idea/
+.idea/*
+_logs/
+_logs/*
+.git/
+.git/*
+data/
+data/*
+node_modules/
+node_modules/*
+libs/utils/logs/
+libs/utils/logs/*
