@@ -55,7 +55,7 @@ ImportEntries.prototype = {
 
         this.locales ={};
 
-        if(this.isLocalized){
+        if(this.isLocalized) {
             this.locales = {"locale_key":{"code":"en-us","name":"English - United States"}};
         }
         _.merge(this.locales, (this.isLocalized) ? helper.readFile(path.join(localesFolderPath, config.modules.locales.fileName)) : {"locale_key":{"code":"en-us","name":"English - United States"}});
@@ -80,7 +80,8 @@ ImportEntries.prototype = {
                     var data = {
                         options: self.requestOptions,
                         contentType_uid: contentTypes[i],
-                        locale: self.locales[key]['code']
+                        locale: self.locales[key]['code'],
+                        retryForSelfReference: false
                     };
                     _importEntries.push(function(data){
                         return function(){ return self.postEntries(data) };
@@ -99,7 +100,7 @@ ImportEntries.prototype = {
             });
         })
     },
-    postEntries: function(data){
+    postEntries: function(data){        
         var self = this;
         return when.promise(function(resolve, reject){
 
@@ -131,17 +132,6 @@ ImportEntries.prototype = {
             for (var entry_uid in entries) {
                 requests.push(function (entry, entry_uid, data, refEntries, masterEntries) {
                     return function(){
-
-                        //update the refEntries for self referred entries
-                        if(selfReferencePresent){
-                            for (var i = 0, total = masterForms[data.contentType_uid]['references'].length; i < total && masterForms[data.contentType_uid]['references'][i]; i++) {
-                                var temp = helper.readFile(path.join(masterEntriesFolderPath, masterForms[data.contentType_uid]['references'][i] + '.json'));
-                                _.merge(refEntries, temp['en-us'] || {});
-                                if (data.locale != 'en-us') {
-                                    _.merge(refEntries, temp[data.locale]);
-                                }
-                            }
-                        }
                         return self.postIt(entry, entry_uid, data, refEntries, masterEntries)
                     };
                 }(entries[entry_uid], entry_uid, data, refEntries, masterEntries));
@@ -151,7 +141,15 @@ ImportEntries.prototype = {
 
             taskResults
             .then(function(results) {
-                resolve();
+                if(selfReferencePresent && !data.retryForSelfReference){
+                    data.retryForSelfReference = true;
+                    self.postEntries(data);
+                    return resolve();
+                } else {
+                    data.retryForSelfReference = false;
+                    return resolve();
+                }
+                //resolve();
             })
             .catch(function(error){
                 reject(error)
@@ -160,6 +158,7 @@ ImportEntries.prototype = {
     },
     postIt : function(entry, entry_uid, data, refEntries, masterEntries) {
         data.options.method = 'POST';
+
         data.options.url = data.options.url.split("/entries/").pop();
         var self = this;
         var masterEntries = masterEntries;
@@ -186,16 +185,27 @@ ImportEntries.prototype = {
                 data.options.method = 'PUT';
             }
 
+            if(data.retryForSelfReference) {
+                var newUID = masterEntries[data.locale][entry_uid];
+                data.options.url = data.options.url + '/' + newUID;
+                data.options.method = 'PUT';
+            }
+
             data.options.json = {entry: entry};
             request(data.options, function (err, res, body) {
                 data.options = oldOptions;
                 if (!err && body && body.entry) {
-                    if (masterEntries[data.locale][entry_uid] == "") {
-                        masterEntries[data.locale][entry_uid] = body.entry.uid;
-                        helper.writeFile(path.join(masterEntriesFolderPath, data.contentType_uid + '.json'), masterEntries);
-                        successLogger(data.locale,": Entry", entry_uid ,"has been migrated successfully.")
+                    if (masterEntries[data.locale][entry_uid] == "" || data.retryForSelfReference) {
+                        if(data.retryForSelfReference){
+                            successLogger(data.locale,": Updated entry ", entry_uid ," as self reference detected.")
+                        } else {
+                            masterEntries[data.locale][entry_uid] = body.entry.uid;
+                            helper.writeFile(path.join(masterEntriesFolderPath, data.contentType_uid + '.json'), masterEntries);
+                            successLogger(data.locale,": Entry", entry_uid ,"has been migrated successfully.")
+                        }
+                        
                     } else {
-                        errorLogger('%s is not found in %s (%s).', entry_uid, data.contentType_uid, data.locale);
+                        errorLogger( entry_uid, ' is not found in', data.contentType_uid, '(',data.locale,').');
                         failed[data.contentType_uid][data.locale][entry_uid].push(entry_uid + " is not found in " + data.contentType_uid + " (" + data.locale + ")");
                     }
                     return resolve()
