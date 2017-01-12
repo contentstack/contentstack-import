@@ -17,10 +17,10 @@ var entriesConfig           = config.modules.entries,
     contentTypesFolderPath  = path.resolve(config.data, config.modules.contentTypes.dirName),
     masterFolderPath        = path.resolve(config.data, 'master'),
     localesFolderPath       = path.resolve(config.data, config.modules.locales.dirName),
-
     masterEntriesFolderPath = path.join(masterFolderPath, config.modules.entries.dirName),
     failed                  = helper.readFile(path.join(masterFolderPath, 'failed.json')) || {},
     base_locale             = config.base_locale;
+
 var masterForms,
     assetMapper,
     assetUrlMapper;
