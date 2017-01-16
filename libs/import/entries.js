@@ -17,7 +17,7 @@ var entriesConfig           = config.modules.entries,
     contentTypesFolderPath  = path.resolve(config.data, config.modules.contentTypes.dirName),
     masterFolderPath        = path.resolve(config.data, 'master'),
     localesFolderPath       = path.resolve(config.data, config.modules.locales.dirName),
-
+    base_locale             = config.base_locale,
     masterEntriesFolderPath = path.join(masterFolderPath, config.modules.entries.dirName),
     failed                  = helper.readFile(path.join(masterFolderPath, 'failed.json')) || {};
 
@@ -56,9 +56,9 @@ ImportEntries.prototype = {
         this.locales ={};
 
         if(this.isLocalized){
-            this.locales = {"locale_key":{"code":"en-us","name":"English - United States"}};
+            this.locales = {"locale_key":base_locale};
         }
-        _.merge(this.locales, (this.isLocalized) ? helper.readFile(path.join(localesFolderPath, config.modules.locales.fileName)) : {"locale_key":{"code":"en-us","name":"English - United States"}});
+        _.merge(this.locales, (this.isLocalized) ? helper.readFile(path.join(localesFolderPath, config.modules.locales.fileName)) : {"locale_key":base_locale});
         return when.promise(function(resolve, reject){
             self.extractEntries()
             .then(function(result){
@@ -121,8 +121,8 @@ ImportEntries.prototype = {
                     selfReferencePresent = true;
                 }
                 var temp = helper.readFile(path.join(masterEntriesFolderPath, masterForms[data.contentType_uid]['references'][i] + '.json'));
-                _.merge(refEntries, temp['en-us'] || {});
-                if (data.locale != 'en-us') {
+                _.merge(refEntries, temp[base_locale.code] || {});
+                if (data.locale != base_locale.code) {
                     _.merge(refEntries, temp[data.locale]);
                 }
             }
@@ -136,8 +136,8 @@ ImportEntries.prototype = {
                         if(selfReferencePresent){
                             for (var i = 0, total = masterForms[data.contentType_uid]['references'].length; i < total && masterForms[data.contentType_uid]['references'][i]; i++) {
                                 var temp = helper.readFile(path.join(masterEntriesFolderPath, masterForms[data.contentType_uid]['references'][i] + '.json'));
-                                _.merge(refEntries, temp['en-us'] || {});
-                                if (data.locale != 'en-us') {
+                                _.merge(refEntries, temp[base_locale.code] || {});
+                                if (data.locale != base_locale.code) {
                                     _.merge(refEntries, temp[data.locale]);
                                 }
                             }
@@ -174,14 +174,14 @@ ImportEntries.prototype = {
             //Added this as entry gets localized even if it is not
             if (self.locales.locale_key && self.locales.locale_key.code != data.locale && self.locales.locale_key.code == entry.locale) {
                 //successLogger(entry_uid, data.locale, entry.locale, " this is not a localized entry.");
-                var newUID = masterEntries['en-us'][entry_uid];
+                var newUID = masterEntries[base_locale.code][entry_uid];
                 masterEntries[data.locale][entry_uid] = newUID;
                 helper.writeFile(path.join(masterEntriesFolderPath, data.contentType_uid + '.json'), masterEntries);
                 return resolve("resolved");
             }
 
-            if (data.locale != 'en-us' && masterEntries['en-us'][entry_uid] && masterEntries[data.locale][entry_uid] == "") {
-                var newUID = masterEntries['en-us'][entry_uid];
+            if (data.locale != base_locale.code && masterEntries[base_locale.code ][entry_uid] && masterEntries[data.locale][entry_uid] == "") {
+                var newUID = masterEntries[base_locale.code][entry_uid];
                 data.options.url = data.options.url + '/' + newUID;
                 data.options.method = 'PUT';
             }
