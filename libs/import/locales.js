@@ -13,7 +13,8 @@ var helper = require('../../libs/utils/helper.js');
 
 var localeConfig        = config.modules.locales,
     localesFolderPath   = path.resolve(config.data, localeConfig.dirName),
-    masterFolderPath    = path.resolve(config.data, 'master');
+    masterFolderPath    = path.resolve(config.data, 'master'),
+    base_locale         = config.base_locale;
 
 /**
  *
@@ -58,7 +59,7 @@ ImportLocales.prototype = {
             if(self.locales){
                 successLogger("Found",Object.keys(self.locales).length,"locales.")
                 for(var uid in self.locales){
-                    if(self.locales[uid]['locale_uid'] != 'en-us'){
+                    if(self.locales[uid]['locale_uid'] != base_locale.code){
                         _importLocales.push(function(uid){
                             return function(){ return self.postLocales(uid)};
                         }(uid));
