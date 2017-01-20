@@ -52,8 +52,6 @@ Note: Before importing entries, you must have to import locales, assets and cont
 
 ### Known issues
 * Self/cyclic reference not supported
-* For now only en-us as master language is supported
-* Content type description missing
 
 ## License
 This project is licensed under MIT license
