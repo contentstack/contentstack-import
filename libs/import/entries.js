@@ -198,7 +198,7 @@ ImportEntries.prototype = {
             });
             
         })
-    }
+    },
     postIt : function(entry, entry_uid, data, refEntries, masterEntries) {
         if(!data.retry){
             data.options.method = 'POST';
