@@ -163,14 +163,7 @@ ImportEntries.prototype = {
             //var selfReferencePresent = false;
 
             for (var i = 0, total = masterForms[data.contentType_uid]['references'].length; i < total && masterForms[data.contentType_uid]['references'][i]; i++) {
-<<<<<<< HEAD
-                if(masterForms[data.contentType_uid]['references'][i] == data.contentType_uid){
-                    selfReferencePresent = true;
-                }
-                var temp = helper.readFile(path.join(masterEntriesFolderPath, masterForms[data.contentType_uid]['references'][i] + '.json'));
-=======
                 var temp = helper.readFile(path.join(masterEntriesFolderPath, masterForms[data.contentType_uid]['references'][i]["content_type_uid"] + '.json'));
->>>>>>> self_reference_support
                 _.merge(refEntries, temp[base_locale.code] || {});
                 if (data.locale != base_locale.code) {
                     _.merge(refEntries, temp[data.locale]);
@@ -179,24 +172,6 @@ ImportEntries.prototype = {
             var requests = [];
 
             for (var entry_uid in entries) {
-<<<<<<< HEAD
-                requests.push(function (entry, entry_uid, data, refEntries, masterEntries) {
-                    return function(){
-
-                        //update the refEntries for self referred entries
-                        if(selfReferencePresent){
-                            for (var i = 0, total = masterForms[data.contentType_uid]['references'].length; i < total && masterForms[data.contentType_uid]['references'][i]; i++) {
-                                var temp = helper.readFile(path.join(masterEntriesFolderPath, masterForms[data.contentType_uid]['references'][i] + '.json'));
-                                _.merge(refEntries, temp[base_locale.code] || {});
-                                if (data.locale != base_locale.code) {
-                                    _.merge(refEntries, temp[data.locale]);
-                                }
-                            }
-                        }
-                        return self.postIt(entry, entry_uid, data, refEntries, masterEntries)
-                    };
-                }(entries[entry_uid], entry_uid, data, refEntries, masterEntries));
-=======
                 if(data.retry && failed[data.contentType_uid][data.locale][entry_uid] && failed[data.contentType_uid][data.locale][entry_uid].indexOf("retry")>-1) {
                     requests.push(function (entry, entry_uid, data, refEntries, masterEntries) {
                         return function(){
@@ -210,8 +185,6 @@ ImportEntries.prototype = {
                         };
                     }(entries[entry_uid], entry_uid, data, refEntries, masterEntries));
                 }
-                
->>>>>>> self_reference_support
             }
 
             var taskResults = sequence(requests);
@@ -250,11 +223,7 @@ ImportEntries.prototype = {
                 return resolve("resolved");
             }
 
-<<<<<<< HEAD
-            if (data.locale != base_locale.code && masterEntries[base_locale.code ][entry_uid] && masterEntries[data.locale][entry_uid] == "") {
-=======
             if (data.locale != base_locale.code && masterEntries[base_locale.code][entry_uid] && masterEntries[data.locale][entry_uid] == "") {
->>>>>>> self_reference_support
                 var newUID = masterEntries[base_locale.code][entry_uid];
                 data.options.url = data.options.url + '/' + newUID;
                 data.options.method = 'PUT';
