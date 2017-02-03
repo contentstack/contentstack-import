@@ -15,7 +15,7 @@ var localeConfig        = config.modules.locales,
     localesFolderPath   = path.resolve(config.data, localeConfig.dirName),
     masterFolderPath    = path.resolve(config.data, 'master'),
     base_locale         = config.base_locale;
-
+    
 /**
  *
  * @constructor

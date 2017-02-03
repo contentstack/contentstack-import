@@ -50,8 +50,5 @@ Once all things are configured, you have to run following commands:
  
 Note: Before importing entries, you must have to import locales, assets and content types.
 
-### Known issues
-* Self/cyclic reference not supported
-
 ## License
 This project is licensed under MIT license

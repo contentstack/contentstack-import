@@ -5,6 +5,7 @@ var request     = require('request'),
     mkdirp      = require('mkdirp'),
     path        = require('path'),
     when        = require('when');
+    _           = require('lodash');
     sequence    = require('when/sequence');
 
 /**
@@ -15,6 +16,8 @@ var helper = require('../../libs/utils/helper.js');
 var contentTypeConfig       = config.modules.contentTypes,
     contentTypesFolderPath  = path.resolve(config.data, contentTypeConfig.dirName),
     masterFolderPath        = path.resolve(config.data, 'master'),
+    retryContentType        = [],
+    successfullMigrated     = [],
     validKeys               = contentTypeConfig.validKeys;
 
 /**
@@ -23,7 +26,7 @@ var contentTypeConfig       = config.modules.contentTypes,
  */
 function ImportContentTypes(){
     this.contentTypes = helper.readFile(path.join(contentTypesFolderPath, '__priority.json'));
-
+    this.master = helper.readFile(path.join(contentTypesFolderPath, '__master.json'));
     this.requestOptions = {
         uri: client.endPoint + config.apis.contentTypes,
         headers: {
@@ -43,7 +46,23 @@ ImportContentTypes.prototype = {
         return when.promise(function(resolve, reject){
             self.extractContentTypes()
             .then(function(result){
-                resolve()
+                self.contentTypes = retryContentType;
+                self.requestOptions.method = "PUT";
+                self.requestOptions['retry'] = true;
+                if(retryContentType.length > 0) {
+                    retryContentType = [];
+                    self.extractContentTypes()
+                    .then(function(result){
+                        return resolve();
+                    })
+                    .catch(function(error){
+                        return reject(error);
+                    })
+                } else {
+                    return resolve();
+                }
+
+                //resolve()
             })
             .catch(function(error){
                 reject(error);
@@ -53,46 +72,94 @@ ImportContentTypes.prototype = {
     extractContentTypes: function(){
         var self = this;
         var _importContentTypes = [];
-        return when.promise(function(resolve, reject){
+        return when.promise(function(resolve, reject) {
             for(var uid in self.contentTypes){
-                _importContentTypes.push(function(uid){
-                    return function(){ return self.postContentTypes(self.contentTypes[uid])};
-                }(uid));
+                if(uid) {
+                    _importContentTypes.push(function(uid){
+                        return function(){ return self.postContentTypes(self.contentTypes[uid])};
+                    }(uid));
+                }
+                
             }
-
             var taskResults = sequence(_importContentTypes);
 
             taskResults
-                .then(function(results) {
-                    resolve();
-                })
-                .catch(function(error){
-                    reject(error)
-                });
+            .then(function(results) {
+                return resolve();
+            })
+            .catch(function(error){
+                reject(error)
+            });
         })
     },
-    postContentTypes: function(data){
-        var self = this;
-        var _contentType = helper.readFile(path.join(contentTypesFolderPath, data + '.json'));
+    postContentTypes: function(uid){
+        var self = this,
+            options = self.requestOptions;
 
-        self.requestOptions.json.content_type = _contentType;
+        var _contentType = helper.readFile(path.join(contentTypesFolderPath, uid + '.json'));
+
+        if(!_contentType) return resolve();
+
+        _contentType = self.removeNonMigratedReferencedContentType(_contentType);
+        if(self.requestOptions.retry) {
+            successLogger("Updating or retring content type", uid);
+            options.uri = client.endPoint + config.apis.contentTypes + "/" +uid;
+        }
+        options.json.content_type = _contentType;
+        
         return when.promise(function(resolve, reject){
-            request(self.requestOptions, function(err, res, body) {
-                if (err || res.statusCode != 201) {
-                    errorLogger('Content type import Failed "', data ,'" Due to', err);
+            request(options, function(err, res, body) {
+                if (err || ( res.statusCode != 201 && res.statusCode != 200)) {
+                    retryContentType.push(options.json.content_type.uid)
                     if(err){
-                        reject(err)
+                        errorLogger('Content type import Failed "', uid ,'" Due to', err);
+                        resolve(err)
                     } else {
-                        reject(body)
+                        errorLogger('Content type import Failed "', uid ,'" Due to', body);
+                        resolve(body)
                     }
 
                 } else {
-                    successLogger('Content type "',data ,'" has been migrated successfully');
-                    resolve(data);
+                    successfullMigrated.push(uid);
+                    if(self.requestOptions.retry || retryContentType.indexOf(uid) == -1) {
+                        successLogger('Content type "',uid ,'" has been migrated successfully.');
+                    } else {
+                        successLogger('Content type "',uid ,'" has been migrated but need update for self or cyclic reference.');
+                    }                    
+                    resolve(uid);
                 }
             })
         })
+        
+    },
+    removeNonMigratedReferencedContentType: function(contentType){
+        var self = this;
+        try{
+            //retryContentType[contentType.uid] = [];
+            self.master[contentType.uid]['references'].map(function(ref, index){
+                if(successfullMigrated.indexOf(ref.content_type_uid)  == -1) {
+                    _.set(contentType, self.master[contentType.uid]['references'][index]['path'], "");
+                    retryContentType.push(contentType.uid)
+                }
+            });
+            return contentType
+        }catch(e){
+            errorLogger(e)
+        }
+        
     }
 }
+
+function keepSchema(originalArray, regex) {
+    var j = 0;
+    while (j < originalArray.length) {
+        if (regex.test(originalArray[j]))
+            originalArray.splice(j, 1);
+        else
+            j++;
+    }
+    return originalArray;
+}
+
 
 module.exports =ImportContentTypes;
