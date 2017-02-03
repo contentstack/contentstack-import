@@ -96,7 +96,6 @@ ImportEntries.prototype = {
                 self.retryFailedEntries().then(function(){
                     return resolve();
                 }).catch(function(error){
-                    console.log(error)
                     return reject();
                 });
             })
@@ -161,9 +160,6 @@ ImportEntries.prototype = {
             //var selfReferencePresent = false;
 
             for (var i = 0, total = masterForms[data.contentType_uid]['references'].length; i < total && masterForms[data.contentType_uid]['references'][i]; i++) {
-                /*if(masterForms[data.contentType_uid]['references'][i]["content_type_uid"] == data.contentType_uid || masterForms[data.contentType_uid]['references'][i]["isCycle"]){
-                    data.cycleDetected = true;
-                }*/
                 var temp = helper.readFile(path.join(masterEntriesFolderPath, masterForms[data.contentType_uid]['references'][i]["content_type_uid"] + '.json'));
                 _.merge(refEntries, temp[base_locale.code] || {});
                 if (data.locale != base_locale.code) {
@@ -200,10 +196,7 @@ ImportEntries.prototype = {
             });
             
         })
-    },
-    singleEntry: function(entry_uid){
-
-    },
+    }
     postIt : function(entry, entry_uid, data, refEntries, masterEntries) {
         if(!data.retry){
             data.options.method = 'POST';
@@ -343,7 +336,7 @@ var updateFieldValue = function(failed, field, entry, refEntries){
         }
     } else {
         for(var key in entry){
-            if(key == field.uid && entry[key]){
+            if(key == field && entry[key]){
                 entry[key] = mapAssets(failed, entry[key]);
             } else if(typeof entry[key] == "object" && entry[key]){
                 entry[key] = updateFieldValue(failed, field, entry[key]);
