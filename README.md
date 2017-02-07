@@ -2,7 +2,7 @@
 
 Built.io Contentstack is a headless CMS with an API-first approach that puts content at the centre. It is designed to simplify the process of publication by separating code from content.
 
-This tool helps you to import content which is exported using contentstack-export utilty into another stack. 
+This tool helps you to import content which is exported using contentstack-export utility into another stack. 
 
 ## Installation
 
@@ -48,6 +48,9 @@ Once all things are configured, you have to run following commands:
  5. entries
  
 Note: Before importing entries, you must have to import locales, assets and content types.
+
+### Known issues
+* Entry versions import not supported.
 
 ## License
 This project is licensed under MIT license
