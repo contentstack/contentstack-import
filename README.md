@@ -50,7 +50,7 @@ Once all things are configured, you have to run following commands:
 Note: Before importing entries, you must have to import locales, assets and content types.
 
 ### Known issues
-* Entry versions import not supported.
+* It will migrate only latest published version of entry.
 
 ## License
 This project is licensed under MIT license
