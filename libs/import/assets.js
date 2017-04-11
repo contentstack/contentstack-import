@@ -42,12 +42,12 @@ ImportAssets.prototype = {
 
         return when.promise(function(resolve, reject){
             self.extractAssets()
-            .then(function(result){
-                resolve()
-            })
-            .catch(function(error){
-                reject(error);
-            })
+                .then(function(result){
+                    resolve()
+                })
+                .catch(function(error){
+                    reject(error);
+                })
         })
     },
     extractAssets: function(){
@@ -75,47 +75,72 @@ ImportAssets.prototype = {
             var taskResults = sequence(_importAssests);
 
             taskResults
-            .then(function(results) {
-                resolve();
-            })
-            .catch(function(error){
-                console.log(error);
-                reject(error)
-            });
+                .then(function(results) {
+                    resolve();
+                })
+                .catch(function(error){
+                    // console.log(error);
+                    reject(error)
+                });
         })
     },
     postAssets: function(data){
         var self = this;
 
+
         return when.promise(function(resolve, reject){
-            var _assets = request.post(data.options, function (err, res, body) {
-                var masterAssets = helper.readFile(path.join(masterFolderPath, assetsConfig.fileName));
-                var masterAssetsUrls = helper.readFile(path.join(masterFolderPath, 'url_master.json'));
+            const MAX_RETRY = 2;
+            var retryCnt = 0;
+            retryAssets();
+            function retryAssets() {
+                var _assets = request.post(data.options, function (err, res, body) {
+                    var masterAssets = helper.readFile(path.join(masterFolderPath, assetsConfig.fileName));
+                    var masterAssetsUrls = helper.readFile(path.join(masterFolderPath, 'url_master.json'));
 
-                if(!err && res.statusCode == 201 && body && body.asset) {
-                    successLogger('Asset', data.title, '[',data.old_uid,'] uploaded.');
-                    var old_url = data.old_url;
-                    var new_url = assetsConfig.host + body.asset.url;
-                    if(!self.assets[data.old_uid]) self.assets[data.old_uid] = body.asset.uid;
-                    if(!masterAssets[data.old_uid]) masterAssets[data.old_uid] = body.asset.uid;
-                    if(!masterAssetsUrls[old_url]) masterAssetsUrls[old_url] = new_url;
-                    helper.writeFile(path.join(masterFolderPath, assetsConfig.fileName), masterAssets);
-                    helper.writeFile(path.join(masterFolderPath, 'url_master.json'), masterAssetsUrls);
-                    resolve(body)
-                } else {
-                    errorLogger('Failed to migrated : ',data.old_uid, ' due to: \n',err);
-                    if(!failed[data.old_uid]) failed[data.old_uid] = (err ? err : body)  ;
-                    helper.writeFile(path.join(masterFolderPath, 'failed.json'), failed);
-                    if(err){
-                        reject(err)
+                    if(!err && res.statusCode == 201 && body && body.asset) {
+                        successLogger('Asset', data.title, '[',data.old_uid,'] uploaded.');
+                        var old_url = data.old_url;
+                        var new_url = assetsConfig.host + body.asset.url;
+                        if(!self.assets[data.old_uid]) self.assets[data.old_uid] = body.asset.uid;
+                        if(!masterAssets[data.old_uid]) masterAssets[data.old_uid] = body.asset.uid;
+                        if(!masterAssetsUrls[old_url]) masterAssetsUrls[old_url] = new_url;
+                        helper.writeFile(path.join(masterFolderPath, assetsConfig.fileName), masterAssets);
+                        helper.writeFile(path.join(masterFolderPath, 'url_master.json'), masterAssetsUrls);
+                        resolve(body)
                     } else {
-                        reject(body)
-                    }
+                        if (retryCnt < MAX_RETRY) {
+                            retryCnt += 1;
+                            var currRetryIntervalMs = (1 << retryCnt) * 1000; //exponential back off logic
+                            setTimeout(retryAssets, currRetryIntervalMs);
+                        }
+                        else {
 
-                }
-            }).form();
-            _assets.append('asset[upload]', fs.createReadStream(data.filePath));
+                            if(!failed[data.old_uid]) failed[data.old_uid] = (err ? err : body)  ;
+                            helper.writeFile(path.join(masterFolderPath, 'failed.json'), failed);
+                            if(err){
+                                var errorcode = "'"+err.code+"'";
+                                var RETRIABLE_NETWORK_ERRORS = ['ECONNRESET', 'ENOTFOUND', 'ESOCKETTIMEDOUT', 'ETIMEDOUT', 'ECONNREFUSED', 'EHOSTUNREACH', 'EPIPE', 'EAI_AGAIN'];
+                                for(var i = 0;i<RETRIABLE_NETWORK_ERRORS.length;i++){
+                                    if(RETRIABLE_NETWORK_ERRORS[i] == errorcode){
+                                        var currRetryIntervalMs = (1 << retryCnt) * 1000; //exponential back off logic
+                                        setTimeout(retryAssets, currRetryIntervalMs);
+                                    }
+                                    else{
+                                        errorLogger('http request fail ',data.old_uid+" Due to ",errorcode);
+                                    }
+                                }
+                            }
+                            else {
+                                errorLogger('request failed due to ',data.old_uid)
+                            }
+                        }
+                        return resolve()
+                    }
+                }).form();
+                _assets.append('asset[upload]', fs.createReadStream(data.filePath));
+            }
         })
+
     }
 }
 
