@@ -15,7 +15,6 @@
     "when": "^3.7.7",
     "winston": "^2.2.0"
   },
-  "license": "MIT",
   "main": "app.js",
   "maintainers": [
     {
@@ -32,7 +31,7 @@
     "url": "https://github.com/builtio-contentstack/contentstack-import"
   },
   "scripts": {
-    "import" : "node app.js",
+    "import": "node app.js",
     "import-assets": "node app.js dump=assets",
     "import-entries": "node app.js dump=entries",
     "import-contenttypes": "node app.js dump=contenttypes",
