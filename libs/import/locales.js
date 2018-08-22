@@ -1,109 +1,93 @@
-/**
- * External module Dependencies.
- */
-var request = require('request'),
-    path    = require('path'),
-    when    = require('when'),
-    sequence  = require('when/sequence');
+var mkdirp = require('mkdirp');
+var fs = require('fs');
+var path = require('path');
+var Promise = require('bluebird');
 
-/**
- * Internal module Dependencies.
- */
-var helper = require('../../libs/utils/helper.js');
+var request = require('../utils/request');
+var helper = require('../utils/helper');
+var log = require('../utils/log');
 
-var localeConfig        = config.modules.locales,
-    localesFolderPath   = path.resolve(config.data, localeConfig.dirName),
-    masterFolderPath    = path.resolve(config.data, 'master'),
-    base_locale         = config.base_locale;
-    
-/**
- *
- * @constructor
- */
-function ImportLocales() {
+var langConfig = config.modules.locales;
+var langFolderPath = path.resolve(config.data, langConfig.dirName);
+var langMapperPath = path.resolve(config.data, 'mapper', 'languages');
+var langUidMapperPath = path.resolve(config.data, 'mapper', 'languages', 'uid-mapper.json');
+var langSuccessPath = path.resolve(config.data, 'mapper', 'languages', 'success.json');
+var langFailsPath = path.resolve(config.data, 'mapper', 'languages', 'fails.json');
 
-    this.locales = helper.readFile(path.resolve(localesFolderPath, localeConfig.fileName));
-    this.requestOptions = {
-        url: client.endPoint + config.apis.locales,
-        headers: {
-            api_key: config.target_stack,
-            authtoken: client.authtoken
-        },
-        method: 'POST',
-        json: {
-            locale : {}
-        }
-    };
+var masterLanguage = config.master_locale;
+
+mkdirp.sync(langMapperPath);
+
+function importLanguages () {
+  this.fails = [];
+  this.success = [];
+  this.langUidMapper = {};
+  this.languages = helper.readFile(path.resolve(langFolderPath, langConfig.fileName));
+  if (fs.existsSync(langUidMapperPath)) {
+    this.langUidMapper = helper.readFile(langUidMapperPath);
+    this.langUidMapper = this.langUidMapper || {};
+  }
+  this.requestOptions = {
+    uri: client.endPoint + config.apis.locales,
+    headers: {
+      api_key: config.target_stack,
+      authtoken: client.authtoken
+    },
+    method: 'POST'
+  };
 }
 
-/**
- *
- * @type {{}}
- */
-ImportLocales.prototype = {
-    start: function(){
-        var self = this;
-        return when.promise(function(resolve, reject){
-            self.extractLocales()
-                .then(function(){
-                    successLogger("Imported locales");
-                    resolve();
-                })
-        });
-    },
-    extractLocales: function(){
-        var self = this;
-        var _importLocales = [];
-
-        return when.promise(function(resolve, reject){
-            if(self.locales){
-                successLogger("Found",Object.keys(self.locales).length,"locales.")
-                for(var uid in self.locales){
-                    if(self.locales[uid]['locale_uid'] != base_locale.code){
-                        _importLocales.push(function(uid){
-                            return function(){ return self.postLocales(uid)};
-                        }(uid));
-                    }
-                }
-
-                var taskResults = sequence(_importLocales);
-
-                taskResults
-                .then(function(results) {
-                    resolve()
-                })
-                .catch(function(error){
-                    errorLogger(error);
-                    reject()
-                });
-            } else {
-                successLogger("No locales found.");
-                resolve()
+importLanguages.prototype = {
+  start: function () {
+    var self = this;
+    return new Promise(function (resolve, reject) {
+      var langUids = Object.keys(self.languages);
+      return Promise.map(langUids, function (langUid) {
+        var lang = self.languages[langUid];
+        if (!self.langUidMapper.hasOwnProperty(langUid) && (lang.code !== masterLanguage)) {
+          var requestOption = {
+            uri: self.requestOptions.uri,
+            headers: self.requestOptions.headers,
+            method: self.requestOptions.method,
+            json: {
+              locale: {
+                code: lang.code
+              }
             }
-
-        })
-
-    },
-    postLocales: function(uid){
-        var old_uid= uid;
-        var self = this;
-        self.requestOptions.json.locale = self.locales[old_uid];
-
-        return when.promise(function(resolve, reject){
-            var masterLocales = helper.readFile(path.join(masterFolderPath, localeConfig.fileName));
-            request(self.requestOptions, function(err, res, body){
-                if(!err && res.statusCode == 201 && body && body.locale.code){
-                    if(!masterLocales[old_uid]) masterLocales[old_uid] = body.locale.uid;
-                    helper.writeFile(path.join(masterFolderPath, localeConfig.fileName), masterLocales);
-                    successLogger("Imported", body.locale.code);
-                    resolve(body);
-                } else {
-                    errorLogger('Error in %s environment import: ', body);
-                    reject(body);
-                }
-            })
-        })
-    }
+          };
+          return request(requestOption).then(function (response) {
+            self.success.push(response.body.locale);
+            self.langUidMapper[langUid] = response.body.locale.uid;
+            helper.writeFile(langUidMapperPath, self.langUidMapper);
+            return;
+          }).catch(function (error) {
+            if (error.hasOwnProperty('error_code') && error.error_code === 247) {
+              log.success(error.errors.code[0]);
+              return;
+            }
+            self.fails.push(lang);
+            log.error('Language: \'' + lang.code + '\' failed to be imported\n' + error);
+            throw error;
+          });
+        } else {
+          // the language has already been created
+          log.success('The language: \'' + lang.code + '\' already exists.');
+          return;
+        }
+        // import 2 languages at a time
+      }, {concurrency: 2}).then(function () {
+        // languages have imported successfully
+        helper.writeFile(langSuccessPath, self.success);
+        log.success('Languages have been imported successfully!');
+        return resolve();
+      }).catch(function (error) {
+        // error while importing languages
+        helper.writeFile(langFailsPath, self.fails);
+        log.error('Language import failed');
+        return reject(error);
+      });
+    });
+  }
 };
 
-module.exports = ImportLocales;
+module.exports = new importLanguages();

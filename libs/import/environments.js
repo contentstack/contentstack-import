@@ -1,107 +1,87 @@
-/**
- * External module Dependencies.
- */
-var request     = require('request'),
-    mkdirp      = require('mkdirp'),
-    path        = require('path'),
-    when        = require('when');
-    sequence    = require('when/sequence');
+var mkdirp = require('mkdirp');
+var fs = require('fs');
+var path = require('path');
+var Promise = require('bluebird');
 
-/**
- * Internal module Dependencies.
- */
-var helper = require('../../libs/utils/helper.js');
+var request = require('../utils/request');
+var helper = require('../utils/helper');
+var log = require('../utils/log');
 
 var environmentConfig = config.modules.environments;
-
 var environmentsFolderPath = path.resolve(config.data, environmentConfig.dirName);
-var masterFolderPath = path.resolve(config.data, 'master');
+var envMapperPath = path.resolve(config.data, 'environments');
+var envUidMapperPath = path.resolve(config.data, 'environments', 'uid-mapping.json');
+var envSuccessPath = path.resolve(config.data, 'environments', 'success.json');
+var envFailsPath = path.resolve(config.data, 'environments', 'fails.json');
 
+mkdirp.sync(envMapperPath);
 
-/**
- *
- * @constructor
- */
-function ImportEnvironments() {
-    this.environments = helper.readFile(path.resolve(environmentsFolderPath, environmentConfig.fileName));
-    this.requestOptions = {
-        url: client.endPoint + config.apis.environments,
-        headers: {
-            api_key: config.target_stack,
-            authtoken: client.authtoken
-        },
-        method: 'POST',
-        json: {
-            environment : {}
-        }
-    };
+function importEnvironments () {
+  this.fails = [];
+  this.success = [];
+  this.envUidMapper = {};
+  this.environments = helper.readFile(path.resolve(environmentsFolderPath, environmentConfig.fileName));
+  if (fs.existsSync(envUidMapperPath)) {
+    this.envUidMapper = helper.readFile(envUidMapperPath);
+    this.envUidMapper = this.envUidMapper || {};
+  }
+  this.requestOptions = {
+    uri: client.endPoint + config.apis.environments,
+    headers: {
+      api_key: config.target_stack,
+      authtoken: client.authtoken
+    },
+    method: 'POST'
+  };
 }
 
-ImportEnvironments.prototype = {
-    start: function(){
-        var self = this;
-        return when.promise(function(resolve, reject){
-            self.extractEnvironments()
-            .then(function(data){
-                    if(data && data == "NOENVFOUND"){
-                        return resolve();
-                    } else {
-                        successLogger("Imported Environments");
-                        return resolve();
-                    }
-
-            })
-        });
-    },
-    extractEnvironments: function(){
-        var self = this;
-        var _importEnvironments = [];
-        return when.promise(function(resolve, reject){
-            if(self.environments){
-                successLogger("Found",Object.keys(self.environments).length,"environment/s.")
-                for(var uid in self.environments){
-                    _importEnvironments.push(function(uid){
-                        return function(){ return self.postEnvironments(uid)};
-                    }(uid));
-                }
-
-                var taskResults = sequence(_importEnvironments);
-
-                taskResults
-                .then(function(results) {
-                    resolve();
-                })
-                .catch(function(error){
-                    console.log(error);
-                    reject()
-                });
-            } else {
-                successLogger("No environments to import.");
-                return resolve("NOENVFOUND");
+importEnvironments.prototype = {
+  start: function () {
+    var self = this;
+    return new Promise(function (resolve, reject) {
+      var envUids = Object.keys(self.environments);
+      return Promise.map(envUids, function (envUid) {
+        var env = self.environments[envUid];
+        if (!self.envUidMapper.hasOwnProperty(envUid)) {
+          var requestOption = {
+            uri: self.requestOptions.uri,
+            headers: self.requestOptions.headers,
+            method: self.requestOptions.method,
+            json: {
+              environment: env
             }
-        })
-    },
-    postEnvironments: function(uid){
-        var old_uid= uid;
-        var self = this;
-        self.requestOptions.json.environment = self.environments[old_uid];
-
-        return when.promise(function(resolve, reject){
-            var masterEnvironments = helper.readFile(path.join(masterFolderPath, environmentConfig.fileName));
-            request(self.requestOptions, function (err, res, body) {
-                if (!err && res.statusCode == 201 && body && body.environment){
-                    if (!masterEnvironments[old_uid]) masterEnvironments[old_uid] = body.environment.uid;
-                    helper.writeFile(path.join(masterFolderPath, environmentConfig.fileName), masterEnvironments);
-                    successLogger('Imported "', body.environment.name, '" environment.');
-                    resolve();
-                } else {
-                    errorLogger('Failed to import environment: ', self.requestOptions.json ,  body);
-                    reject()
-                }
-            })
-        })
-    }
+          };
+          // return self.createEnvironments(self.environments[envUid]);
+          return request(requestOption).then(function (response) {
+            self.success.push(response.body.environment);
+            self.envUidMapper[envUid] = response.body.environment.uid;
+            helper.writeFile(envUidMapperPath, self.envUidMapper);
+            return;
+          }).catch(function (error) {
+            self.fails.push(env);
+            log.error('Environment: \'' + env.name + '\' failed to be imported\n' + error);
+            return;
+          });
+        } else {
+          // the environment has already been created
+          log.success('The environment: \'' + env.name + '\' already exists. Skipping it to avoid duplicates!');
+          return;
+        }
+        // import 2 environments at a time
+      }, {concurrency: 2}).then(function () {
+        // environments have imported successfully
+        helper.writeFile(envSuccessPath, self.success);
+        log.success('Environments have been imported successfully!');
+        return resolve();
+      }).catch(function (error) {
+        // error while importing environments
+        helper.writeFile(envFailsPath, self.fails);
+        log.error('Environment import failed');
+        return reject(error);
+      });
+    });
+  }
 };
 
 
-module.exports = ImportEnvironments;
+module.exports = new importEnvironments();

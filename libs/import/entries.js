@@ -1,406 +1,608 @@
-/**
- * External module Dependencies.
- */
-var request     = require('request'),
-    path        = require('path'),
-    _           = require('lodash'),
-    when        = require('when'),
-    sequence    = require('when/sequence');
+var Promise = require('bluebird');
+var fs = require('fs');
+var path = require('path');
+var _ = require('lodash');
+var mkdirp = require('mkdirp');
 
-/**
- * Internal module Dependencies.
- */
-var helper = require('../../libs/utils/helper.js');
+var request = require('../utils/request');
+var helper = require('../utils/helper');
+var log = require('../utils/log');
+var lookupReplaceAssets = require('../utils/lookupReplaceAssets');
+var lookupReplaceEntries = require('../utils/lookupReplaceEntries');
+var supress = require('../utils/supress-mandatory-fields');
 
-var entriesConfig           = config.modules.entries,
-    entriesFolderPath       = path.resolve(config.data, entriesConfig.dirName),
-    contentTypesFolderPath  = path.resolve(config.data, config.modules.contentTypes.dirName),
-    masterFolderPath        = path.resolve(config.data, 'master'),
-    localesFolderPath       = path.resolve(config.data, config.modules.locales.dirName),
-    base_locale             = config.base_locale,
+var eConfig = config.modules.entries;
+var ePath = path.resolve(config.data, eConfig.dirName);
+var ctPath = path.resolve(config.data, config.modules.content_types.dirName);
+var lPath = path.resolve(config.data, config.modules.locales.dirName, config.modules.locales.fileName);
 
-    masterEntriesFolderPath = path.join(masterFolderPath, config.modules.entries.dirName),
-    failed                  = helper.readFile(path.join(masterFolderPath, 'failed.json')) || {},
-    base_locale             = config.base_locale;
+var mappedAssetUidPath = path.resolve(config.data, 'mapper', 'assets', 'uid-mapping.json');
+var mappedAssetUrlPath = path.resolve(config.data, 'mapper', 'assets', 'url-mapping.json');
 
-var masterForms,
-    assetMapper,
-    retryEntries,
-    assetUrlMapper;
+var entryMapperPath = path.resolve(config.data, 'mapper', 'entries');
+mkdirp.sync(entryMapperPath);
 
-/**
- *
- * @constructor
- */
-function ImportEntries(isLocalized){
-    this.isLocalized = isLocalized;
-    this.entries    = {};
-    this.requestOptions = {
-        headers: {
-            api_key: config.target_stack,
-            authtoken: client.authtoken
-        },
-        method: 'POST',
-        qs: {locale:''},
-        json: true
-    };
+var entryUidMapperPath = path.join(entryMapperPath, 'uid-mapping.json');
+var uniqueUidMapperPath = path.join(entryMapperPath, 'unique-mapping.json');
+var modifiedSchemaPath = path.join(entryMapperPath, 'modified-schemas.json');
 
+var createdEntriesWOUidPath = path.join(entryMapperPath, 'created-entries-wo-uid.json');
+var failedWOPath = path.join(entryMapperPath, 'failedWO.json');
+
+var masterLanguage = config.master_locale;
+var skipFiles = ['__master.json', '__priority.json', 'schema.json'];
+var entryBatchLimit = eConfig.batchLimit || 16;
+
+function importEntries () {
+  var self = this;
+  // Object of Schemas, referred to by their content type uid
+  this.ctSchemas = {};
+  // Array of content type uids, that have reference fields
+  this.refSchemas = [];
+  // Collection of entries, that were not created, as they already exist on Stack
+  this.createdEntriesWOUid = [];
+  // Collection of entry uids, mapped to the language they exist in
+  this.uniqueUids = {};
+  // Map of old entry uid to new
+  this.mappedUids = {};
+  // Entries that were created successfully
+  this.success = [];
+  // Entries that failed to get created OR updated
+  this.fails = [];
+
+  this.languages = helper.readFile(lPath);
+
+  var files = fs.readdirSync(ctPath);
+
+  for (var index in files) {
+    if (skipFiles.indexOf(files[index]) === -1) {
+      var schema = require(path.resolve(ctPath, files[index]));
+      self.ctSchemas[schema.uid] = schema;
+    }
+  }
+
+  this.mappedAssetUids = helper.readFile(mappedAssetUidPath);
+  this.mappedAssetUrls = helper.readFile(mappedAssetUrlPath);
+
+  this.mappedAssetUids = this.mappedAssetUids || {};
+  this.mappedAssetUrls = this.mappedAssetUrls || {};
+
+  this.requestOptionTemplate = {
+    // /v3/content_types/
+    uri: client.endPoint + config.apis.content_types,
+    headers: {
+      api_key: config.target_stack,
+      authtoken: client.authtoken
+    },
+    json: {
+      entry: {}
+    }
+  };
 }
 
+importEntries.prototype = {
+  /**
+   * Start point for entry import
+   * @return promise
+   */
+  start: function () {
+    var self = this;
+    return new Promise(function (resolve, reject) {
+      var langs = [masterLanguage.code];
+      for (var i in self.languages) {
+        langs.push(self.languages[i].code);
+      }
 
-ImportEntries.prototype = {
-    start: function(){
-        var self = this;
-
-        masterForms     = helper.readFile(path.join(contentTypesFolderPath, '__master.json'));
-        assetMapper     = helper.readFile(path.join(masterFolderPath, config.modules.assets.fileName));
-        assetUrlMapper  = helper.readFile(path.join(masterFolderPath, 'url_master.json'));
-
-        this.locales ={};
-
-
-        if(this.isLocalized) {
-            this.locales = {"locale_key": base_locale};
-        }
-        _.merge(this.locales, (this.isLocalized) ? helper.readFile(path.join(localesFolderPath, config.modules.locales.fileName)) : {"locale_key":base_locale});
-        return when.promise(function(resolve, reject){
-            self.extractEntries()
-            .then(function(result){
-                return resolve();
-            })
-            .catch(function(error){
-                reject(error);
-            })
-        })
-    },
-    extractEntries: function(){
-        var self = this,
-            contentTypes = helper.readFile(path.join(contentTypesFolderPath, '__priority.json')),
-            _importEntries = [];
-
-        return when.promise(function(resolve, reject){
-            for(var i = 0, total = contentTypes.length; i < total;i++) {
-                for(var key in self.locales){
-                    var data = {
-                        options: self.requestOptions,
-                        contentType_uid: contentTypes[i],
-                        locale: self.locales[key]['code']
-                    };
-                    _importEntries.push(function(data){
-                        return function(){ return self.postEntries(data) };
-                    }(data));
-                }
-            }
-
-            var taskResults = sequence(_importEntries);
-
-            taskResults
-            .then(function(results) {
-                self.retryFailedEntries().then(function(){
-                    return resolve();
-                }).catch(function(error){
-                    return reject();
+      return self.supressFields().then(function () {
+        var counter = 0;
+        return Promise.map(langs, function () {
+          var lang = langs[counter];
+          if ((config.hasOwnProperty('onlylocales') && config.onlylocales.indexOf(lang) !== -1) || !config.hasOwnProperty('onlylocales')) {
+            return self.createEntries(lang).then(function () {
+              return self.getCreatedEntriesWOUid().then(function () {
+                return self.repostEntries(lang).then(function () {
+                  log.success('Successfully imported \'' + lang + '\' entries!');
+                  counter++;
+                  return;
+                }).catch(function (error) {
+                  throw error;
                 });
-            })
-            .catch(function(error){
-                return reject(error)
+              }).catch(function (error) {
+                throw error;
+              });
+            }).catch(function (error) {
+              log.error('Failed to import ' + lang + ' entries!');
+              throw error;
             });
-        })
-    },
-    retryFailedEntries: function(){
-        //failed = helper.readFile(path.join(masterFolderPath, 'failed.json')) || {};
-
-        var self = this,
-            contentTypes = _.keys(failed),
-            _importEntries = [];
-
-        return when.promise(function(resolve, reject){
-            for(var i = 0, total = contentTypes.length; i < total;i++) {
-                for(var key in self.locales){
-                    var data = {
-                        options: self.requestOptions,
-                        contentType_uid: contentTypes[i],
-                        locale: self.locales[key]['code'],
-                        retry : true
-                    };
-
-                    data.options.method = 'PUT';
-
-                    _importEntries.push(function(data){
-                        return function(){ return self.postEntries(data) };
-                    }(data));
-                }
-            }
-
-            var taskResults = sequence(_importEntries);
-
-            taskResults
-            .then(function(results) {
-                //self.retryFailedEntries();
-                return resolve();
-            })
-            .catch(function(error){
-                reject(error)
+          } else {
+            log.success(lang + ' has not been configured for import, thus skipping it');
+            counter++;
+            return;
+          }
+        }, {
+          concurrency: 1
+        }).then(function () {
+          return self.unSupressFields().then(function () {
+            return self.removeBuggedEntries().then(function () {
+              log.success('Entries imported successfully!');
+              return resolve();
+            }).catch(function (error) {
+              log.error('Error while removing bugged entries from master language!');
+              throw error;
             });
+          }).catch(function (error) {
+            log.error('Error while un-supressing content types');
+            throw error;
+          });
+        }).catch(function (error) {
+          return reject(error);
         });
-    },
-    postEntries: function(data, __resolve){        
-        var self = this;
-        return when.promise(function(resolve, reject){
-            var entries = helper.readFile(path.join(entriesFolderPath, data.contentType_uid, data.locale + '.json'));
-            var masterEntries = helper.readFile(path.join(masterEntriesFolderPath, data.contentType_uid + '.json'));
+      }).catch(function (error) {
+        return reject(error);
+      });
+    });
+  },
+  createEntries: function (lang) {
+    var self = this;
+    return new Promise(function (resolve, reject) {
+      var contentTypeUids = Object.keys(self.ctSchemas);
+      if (fs.existsSync(entryUidMapperPath)) {
+        self.mappedUids = helper.readFile(entryUidMapperPath);
+      }
+      self.mappedUids = self.mappedUids || {};
+      return Promise.map(contentTypeUids, function (ctUid) {
+        var eLangFolderPath = path.join(entryMapperPath, lang);
+        var eLogFolderPath = path.join(entryMapperPath, lang, ctUid);
+        mkdirp.sync(eLogFolderPath);
+        // entry file path
+        var eFilePath = path.resolve(ePath, ctUid, lang + '.json');
 
-            data.options.url = client.endPoint + config.apis.contentTypes + "/" + data.contentType_uid + config.apis.entries;
-            data.options.qs.locale = data.locale;
+        // log created/updated entries
+        var successEntryLogPath = path.join(eLogFolderPath, 'success.json');
+        var failedEntryLogPath = path.join(eLogFolderPath, 'fails.json');
+        var createdEntriesPath = path.join(eLogFolderPath, 'created-entries.json');
+        var createdEntries = {};
+        if (fs.existsSync(createdEntriesPath)) {
+          createdEntries = helper.readFile(createdEntriesPath);
+          createdEntries = createdEntries || {};
+        }
 
-            if(!data.retry){
-                /* failed entry logging */
-                if (!failed[data.contentType_uid]) failed[data.contentType_uid] = {};
-                if (!failed[data.contentType_uid][data.locale]) failed[data.contentType_uid][data.locale] = {};
-            }            
+        if (fs.existsSync(eFilePath)) {
+          var entries = helper.readFile(eFilePath);
+          if (!_.isPlainObject(entries)) {
+            log.success('No entries were found for Content type:\'' + ctUid + '\' in \'' + lang + '\' language!');
+            return resolve();
+          }
+          for (var eUid in entries) {
+            // will replace all old asset uid/urls with new ones
+            entries[eUid] = lookupReplaceAssets({content_type: self.ctSchemas[ctUid], entry: entries[eUid]}, self.mappedAssetUids, self.mappedAssetUrls, eLangFolderPath);
+          }
 
-            var refEntries = {};
-            //var selfReferencePresent = false;
+          var eUids = Object.keys(entries);
+          var batches = [];
 
-            for (var i = 0, total = masterForms[data.contentType_uid]['references'].length; i < total && masterForms[data.contentType_uid]['references'][i]; i++) {
-                var temp = helper.readFile(path.join(masterEntriesFolderPath, masterForms[data.contentType_uid]['references'][i]["content_type_uid"] + '.json'));
-                _.merge(refEntries, temp[base_locale.code] || {});
-                if (data.locale != base_locale.code) {
-                    _.merge(refEntries, temp[data.locale]);
+          // Run entry creation in batches of ~16~ entries
+          for (var i = 0; i < eUids.length; i+=entryBatchLimit) {
+            batches.push(eUids.slice(i, i+entryBatchLimit));
+          }
+
+          return Promise.map(batches, function (batch) {
+            return Promise.map(batch, function (eUid) {
+              if (createdEntries.hasOwnProperty(eUid)) {
+                log.success('Skipping ' + JSON.stringify({content_type: ctUid, locale: lang, oldEntryUid: eUid, newEntryUid: createdEntries[eUid]}) + ' as it is already created');
+                self.success[ctUid] = createdEntries[eUid];
+                // if its a non-master language, i.e. the entry isn't present in the master language
+                if (lang !== masterLanguage) {
+                  self.uniqueUids[eUid] = self.uniqueUids[eUid] || {};
+                  if (self.uniqueUids[eUid].locales) {
+                    self.uniqueUids[eUid].locales.push(lang);
+                  } else {
+                    self.uniqueUids[eUid].locales = [lang];
+                  }
+                  self.uniqueUids[eUid].content_type = ctUid;
                 }
-            }
-            var requests = [];
-
-            for (var entry_uid in entries) {
-                if(data.retry && failed[data.contentType_uid][data.locale][entry_uid] && failed[data.contentType_uid][data.locale][entry_uid].indexOf("retry")>-1) {
-                    requests.push(function (entry, entry_uid, data, refEntries, masterEntries) {
-                        return function(){
-                            return self.postIt(entry, entry_uid, data, refEntries, masterEntries)
-                        };
-                    }(entries[entry_uid], entry_uid, data, refEntries, masterEntries));
-                } else if (!data.retry){
-                    requests.push(function (entry, entry_uid, data, refEntries, masterEntries) {
-                        return function(){
-                            return self.postIt(entry, entry_uid, data, refEntries, masterEntries)
-                        };
-                    }(entries[entry_uid], entry_uid, data, refEntries, masterEntries));
+                return;
+              }
+              var requestObject = {
+                uri: self.requestOptionTemplate.uri + ctUid + config.apis.entries,
+                method: 'POST',
+                headers: self.requestOptionTemplate.headers,
+                qs: {
+                  locale: lang
+                },
+                json: {
+                  entry: entries[eUid]
                 }
-            }
+              };
 
-            var taskResults = sequence(requests);
+              if (self.mappedUids.hasOwnProperty(eUid)) {
+                requestObject.uri += self.mappedUids[eUid];
+                requestObject.method = 'PUT';
+              }
 
-            return taskResults
-            .then(function(results) {
-                return resolve();
-            })
-            .catch(function(error){
-                reject(error)
+              return request(requestObject).then(function (response) {
+                self.success[ctUid] = self.success[ctUid] || [];
+                self.success[ctUid].push(entries[eUid]);
+                if (!self.mappedUids.hasOwnProperty(eUid)) {
+                  self.mappedUids[eUid] = response.body.entry.uid;
+                  createdEntries = response.body.entry;
+                  // if its a non-master language, i.e. the entry isn't present in the master language
+                  if (lang !== masterLanguage) {
+                    self.uniqueUids[eUid] = self.uniqueUids[eUid] || {};
+                    if (self.uniqueUids[eUid].locales) {
+                      self.uniqueUids[eUid].locales.push(lang);
+                    } else {
+                      self.uniqueUids[eUid].locales = [lang];
+                    }
+                    self.uniqueUids[eUid].content_type = ctUid;
+                  }
+                }
+                return;
+              }).catch(function (error) {
+                if (error.hasOwnProperty('error_code') && error.error_code === 119) {
+                  log.error('Error creating entry due to: ' + JSON.stringify(error));
+                  self.createdEntriesWOUid.push({content_type: ctUid, locale: lang, entry: entries[eUid], error: error});
+                  helper.writeFile(createdEntriesWOUidPath, self.createdEntriesWOUid);
+                  return;
+                }
+                // TODO: if status code: 422, check the reason
+                // 429 for rate limit
+                log.error('Error creating entry');
+                self.fails.push({content_type: ctUid, locale: lang, entry: entries[eUid], error: error});
+                return;
+              });
+              // create/update 5 entries at a time
+            }, {concurrency: 1}).then(function () {
+              helper.writeFile(successEntryLogPath, self.success[ctUid]);
+              helper.writeFile(failedEntryLogPath, self.fails[ctUid]);
+              helper.writeFile(entryUidMapperPath, self.mappedUids);
+              helper.writeFile(uniqueUidMapperPath, self.uniqueUids);
+              helper.writeFile(createdEntriesPath, createdEntries);
+              return;
+            }).catch(function (error) {
+              // error while creating entries in batch
+              throw error;
             });
+            // process one batch at a time
+          }, {concurrency: 1}).then(function () {
+            log.success('Entries created successfully in ' + ctUid + ' content type in ' + lang + ' locale!');
+            self.success[ctUid] = [];
+            self.fails[ctUid] = [];
+            return;
+          }).catch(function (error) {
+            log.error('Entry creation failed for ' + ctUid + ' content type in ' + lang + ' locale!\n' + error);
+            // error while creating entries in ctUid
+            throw error;
+          });
+        } else {
+          throw new Error('Unable to find entry file path for ' + ctUid + ' content type!\nThe file \'' + eFilePath + '\' does not exist!');
+        }
+      }, { concurrency: 1} ).then(function () {
+        log.success('Entries created successfully in \'' + lang + '\' language');
+        return resolve();
+      }).catch(function (error) {
+        log.error('Failed to create entries in \'' + lang + '\' language');
+        return reject(error);
+      });
+    });
+  },
+  getCreatedEntriesWOUid: function () {
+    var self = this;
+    return new Promise(function (resolve) {
+      self.createdEntriesWOUid = helper.readFile(createdEntriesWOUidPath);
+      self.failedWO = [];
+      if (_.isArray(self.createdEntriesWOUid) && self.createdEntriesWOUid.length) {
+        return Promise.map(self.createdEntriesWOUid, function (entry) {
+          return self.fetchEntry(entry);
+        }, {concurrency: 1}).then(function () {
+          helper.writeFile(failedWOPath, self.failedWO);
+          log.success('Mapped entries without mapped uid successfully!');
+          return resolve();
+        });
+      } else {
+        log.success('No entries without mapped uid found!');
+        return resolve();
+      }
+    });
+  },
+  repostEntries: function (lang) {
+    var self = this;
+    return new Promise(function (resolve, reject) {
+      var _mapped_ = helper.readFile(path.join(entryMapperPath, 'uid-mapping.json'));
+      if (_.isPlainObject(_mapped_)) {
+        self.mappedUids = _.merge(_mapped_, self.mappedUids);
+      }
+      return Promise.map(self.refSchemas, function (ctUid) {
+        var eFolderPath = path.join(entryMapperPath, lang, ctUid);
+        var eSuccessFilePath = path.join(eFolderPath, 'success.json');
+        if (!fs.existsSync(eSuccessFilePath)) {
+          log.error('Success file was not found at: ' + eSuccessFilePath);
+          return resolve();
+        }
+
+        var entries = helper.readFile(eSuccessFilePath);
+        entries = entries || [];
+        if (entries.length === 0) {
+          log.success('No entries were created to be updated in \'' + lang + '\' language!');
+          return resolve();
+        }
+
+        // Keep track of entries that have their references updated
+        var refsUpdatedUids = helper.readFile(path.join(eFolderPath, 'refsUpdatedUids.json'));
+        var refsUpdateFailed = helper.readFile(path.join(eFolderPath, 'refsUpdateFailed.json'));
+        var schema = self.ctSchemas[ctUid];
+
+        var batches = [];
+        refsUpdatedUids = refsUpdatedUids || [];
+        refsUpdateFailed = refsUpdateFailed || [];
+
+        // map reference uids @mapper/language/mapped-uids.json
+        // map failed reference uids @mapper/language/unmapped-uids.json
+        var refUidMapperPath = path.join(entryMapperPath, lang);
+
+        entries = _.map(entries, function (entry) {
+          var uid = entry.uid;
+          var _entry = lookupReplaceEntries({content_type: schema, entry: entry}, _.clone(self.mappedUids), refUidMapperPath);
+          // if there's self references, the uid gets replaced
+          _entry.uid = uid;
+          return _entry;
+        });
+
+        // Run entry creation in batches of ~16~ entries
+        for (var i = 0; i < entries.length; i+=entryBatchLimit) {
+          batches.push(entries.slice(i, i+entryBatchLimit));
+        }
+
+        return Promise.map(batches, function (batch, index) {
+          return Promise.map(batch, function (entry) {
+            entry.uid = self.mappedUids[entry.uid];
+            if (refsUpdatedUids.indexOf(entry.uid) !== -1) {
+              log.success('Entry: ' + entry.uid + ' in Content Type: ' + ctUid + ' in lang: ' + lang + ' references fields are already updated.');
+              return;
+            }
             
-        })
-    },
-    postIt : function(entry, entry_uid, data, refEntries, masterEntries) {
-        if(!data.retry){
-            data.options.method = 'POST';
-        }
-
-        data.options.url = data.options.url.split("/entries/").pop();
-        var self = this;
-        var masterEntries = masterEntries;
-        return when.promise(function (resolve, reject) {
-            if (!failed[data.contentType_uid][data.locale][entry_uid])
-                failed[data.contentType_uid][data.locale][entry_uid] = [];
-
-            entry = updateEntry(failed[data.contentType_uid][data.locale][entry_uid], entry, data.contentType_uid, refEntries);
-            var oldOptions = _.clone(data.options, true);
-
-            //Added this as entry is getting localized even if it is not
-            if (self.locales.locale_key && self.locales.locale_key.code != data.locale && self.locales.locale_key.code == entry.locale) {
-                //successLogger(entry_uid, data.locale, entry.locale, " this is not a localized entry.");
-                var newUID = masterEntries[base_locale.code][entry_uid];
-                masterEntries[data.locale][entry_uid] = newUID;
-                helper.writeFile(path.join(masterEntriesFolderPath, data.contentType_uid + '.json'), masterEntries);
-                return resolve("resolved");
-            }
-
-            if (data.locale != base_locale.code && masterEntries[base_locale.code][entry_uid] && masterEntries[data.locale][entry_uid] == "") {
-                var newUID = masterEntries[base_locale.code][entry_uid];
-                data.options.url = data.options.url + '/' + newUID;
-                data.options.method = 'PUT';
-            } 
-
-
-            if(masterEntries[data.locale][entry_uid] && masterEntries[data.locale][entry_uid] !="" && failed[data.contentType_uid][data.locale][entry_uid] && failed[data.contentType_uid][data.locale][entry_uid].indexOf("retry")>-1) {
-                var newUID = masterEntries[data.locale][entry_uid];
-                data.options.url = data.options.url + '/' + newUID;
-                data.options.method = 'PUT';
-            } 
-
-            data.options.json = {entry: entry};
-
-            request(data.options, function (err, res, body) {
-                data.options = oldOptions;
-                if (!err && body && body.entry) {
-                    if (masterEntries[data.locale][entry_uid] == "" || data.retry) {
-                        if(data.retry){
-                            successLogger(data.locale,": Updated entry ", entry_uid ," as self reference detected.")
-                        } else {
-                            masterEntries[data.locale][entry_uid] = body.entry.uid;
-                            helper.writeFile(path.join(masterEntriesFolderPath, data.contentType_uid + '.json'), masterEntries);
-                            successLogger(data.contentType_uid,":",data.locale,": Entry", entry_uid ,"has been migrated successfully.")
-                        }
-                        
-                    } else {
-                        errorLogger( entry_uid, ' is not found in', data.contentType_uid, '(',data.locale,').');
-                        failed[data.contentType_uid][data.locale][entry_uid].push(entry_uid + " is not found in " + data.contentType_uid + " (" + data.locale + ")");
-                    }
-
-                    if(failed){
-                        helper.writeFile(path.join(masterFolderPath, 'failed.json'), failed);
-                    }
-                    return resolve();
-                } else {
-                    failed[data.contentType_uid][data.locale][entry_uid].push(body)
-                    // failed status updates
-                    errorLogger('Failed to create entry: ', entry_uid, data.contentType_uid, data.locale,' \n due to \n ', body, "Method was",data.options.method, 'url was', data.options.method);
-                    helper.writeFile(path.join(masterFolderPath, 'failed.json'), failed);
-
-                    /*if(err){
-                        errorLogger("Faild due to error: ",err)
-                        return reject(err);
-                    }*/
-
-                    return resolve(body);
-                    
+            var requestObject = {
+              uri: self.requestOptionTemplate.uri + ctUid + config.apis.entries + entry.uid,
+              method: 'PUT',
+              headers: self.requestOptionTemplate.headers,
+              qs: {
+                locale: lang
+              },
+              json: {
+                entry: entry
+              }
+            };
+            return request(requestObject).then(function (response) {
+              for (var j = 0; j < entries.length; j++) {
+                if (entries[j].uid === response.body.entry.uid) {
+                  entries[j] = response.body.entry;
+                  break;
                 }
+              }
+              refsUpdatedUids.push(response.body.entry.uid);
+              return;
+            }).catch(function (error) {
+              log.error('Entry Uid: ' + entry.uid + ' of Content Type: ' + ctUid + ' failed to update in locale: ' + lang);
+              log.error(error);
+              refsUpdateFailed.push({content_type: ctUid, entry: entry, locale: lang, error: error});
+              return;
             });
+          }, {concurrency: 1}).then(function () {
+            // batch completed successfully
+            helper.writeFile(path.join(eFolderPath, 'success.json'), entries);
+            helper.writeFile(path.join(eFolderPath, 'refsUpdatedUids.json'), refsUpdatedUids);
+            helper.writeFile(path.join(eFolderPath, 'refsUpdateFailed.json'), refsUpdateFailed);
+            log.success('Completed batch no: ' + (index + 1) + ' successfully!');
+            return;
+          }).catch(function (error) {
+            // error while executing entry in batch
+            log.error('Failed at batch no: ' + (index + 1));
+            throw error;
+          });
+        }, {concurrency: 1}).then(function () {
+          // finished updating entries with references
+          log.success('Imported entries of Content Type: \'' + ctUid + '\' in language: \'' + lang + '\' successfully!');
+          return;
+        }).catch(function (error) {
+          // error while updating entries with references
+          log.error('Failed while importing entries of Content Type: \'' + ctUid + '\' in language: \'' + lang + '\' successfully!');
+          throw error;
         });
-    }
-}
-
-
-/**
- *
- * Private functions
- */
-
-/**
- *
- * @param failed
- * @param fieldValue
- * @returns {*}
- */
-var mapAssets = function(failed, fieldValue){
-    if(fieldValue){
-        if(typeof fieldValue == "object"){
-            for(var i = 0, total = fieldValue.length; i < total; i++){
-                if(assetMapper && assetMapper[fieldValue[i]]){
-                    fieldValue[i] = assetMapper[fieldValue[i]];
-                } else {
-                    failed.push(fieldValue[i] + " is not found in the assetsUids mapper.");
-                }
-            }
-        }else{
-            if(assetMapper && assetMapper[fieldValue]){
-                fieldValue = assetMapper[fieldValue];
-            } else {
-                failed.push(fieldValue + " is not found in the assetsUids mapper.");
-            }
+      }, {concurrency: 1}).then(function () {
+        // completed updating entry references
+        log.success('Imported entries in \'' + lang + '\' language successfully!');
+        return resolve();
+      }).catch(function (error) {
+        // error while updating entry references
+        log.error('Failed to import entries in ' + lang + ' language');
+        return reject(error);
+      });
+    });
+  },
+  supressFields: function () {
+    var self = this;
+    return new Promise(function (resolve, reject) {
+      var modifiedSchemas = [];
+      var supressedSchemas = [];
+      // var contentTypeUids = Object.keys(self.ctSchemas);
+      for (var uid in self.ctSchemas) {
+        var contentTypeSchema = _.cloneDeep(self.ctSchemas[uid]);
+        var flag = {
+          supressed: false,
+          references: false
+        };
+        supress(contentTypeSchema.schema, flag);
+        // check if supress modified flag
+        if (flag.supressed) {
+          supressedSchemas.push(contentTypeSchema);
+          modifiedSchemas.push(self.ctSchemas[uid]);
         }
-    }
-    return fieldValue;
+
+        if (flag.references) {
+          self.refSchemas.push(uid);
+        }
+      }
+
+      helper.writeFile(modifiedSchemaPath, modifiedSchemas);
+
+      return Promise.map(supressedSchemas, function (schema) {
+        var requestObject = {
+          uri: self.requestOptionTemplate.uri + schema.uid,
+          method: 'PUT',
+          headers: self.requestOptionTemplate.headers,
+          json: {
+            content_type: schema
+          }
+        };
+        return request(requestObject).then(function () {
+          return;
+        }).catch(function (error) {
+          log.error('Failed to modify mandatory field of \'' + schema.uid + '\' content type');
+          // failed to update mandatory field content type
+          throw error;
+        });
+        // update 5 content types at a time
+      }, {concurrency: 3}).then(function () {
+        return resolve();
+      }).catch(function (error) {
+        log.error('Error while supressing mandatory field schemas');
+        return reject(error);
+      });
+    });
+  },
+  fetchEntry: function (query) {
+    var self = this;
+    return new Promise(function (resolve) {
+      var requestObject = {
+        uri: self.requestOptionTemplate.uri + query.content_type + config.apis.entries,
+        method: 'GET',
+        headers: self.requestOptionTemplate.headers,
+        qs: {
+          query: {
+            title: query.entry.title
+          },
+          locale: query.locale
+        }
+      };
+
+      return request(requestObject).then(function (response) {
+        if (!response.body.entries.length) {
+          log.error('Unable to map entry WO uid: ' + query.entry.uid);
+          log.debug('Request:\n' + JSON.stringify(requestObject));
+          self.failedWO.push(query);
+          return resolve();
+        }
+        self.mappedUids[query.entry.uid] = response.body.entries[0].uid;
+        var _ePath = path.join(entryMapperPath, query.locale, query.content_type, 'success.json');
+        var entries = helper.readFile(_ePath);
+        entries.push(query.entry);
+        helper.writeFile(_ePath, entries);
+        log.success('Completed mapping entry wo uid: ' + query.entry.uid + ': ' + response.body.entries[0].uid);
+        return resolve();
+      }).catch(function (error) {
+        log.error(error);
+        return resolve();
+      });
+    });
+  },
+  unSupressFields: function () {
+    var self = this;
+    return new Promise(function (resolve, reject) {
+      var modifiedSchemas = helper.readFile(modifiedSchemaPath);
+      var modifiedSchemasUids = [];
+      return Promise.map(modifiedSchemas, function (schema) {
+        var requestObject = {
+          uri: self.requestOptionTemplate.uri + schema.uid,
+          method: 'PUT',
+          headers: self.requestOptionTemplate.headers,
+          json: {
+            content_type: schema
+          }
+        };
+
+        return request(requestObject).then(function () {
+          modifiedSchemasUids.push(schema.uid);
+          log.success('Content type: \'' + schema.uid + '\' has been restored to its previous glory!');
+          return;
+        }).catch(function (error) {
+          log.error('Failed to re-update ' + schema.uid);
+          log.error(error);
+          return;
+        });
+      }, {concurrency: 3}).then(function () {
+        for (var i = 0; i < modifiedSchemas.length; i++) {
+          if (modifiedSchemasUids.indexOf(modifiedSchemas[i].uid) !== -1) {
+            modifiedSchemas.splice(i, 1);
+            i--;
+          }
+        }
+        // re-write, in case some schemas failed to update
+        helper.writeFile(modifiedSchemaPath, _.compact(modifiedSchemas));
+        log.success('Re-modified content type schemas to their original form!');
+        return resolve();
+      }).catch(function (error) {
+        // failed to update modified schemas back to their original form
+        return reject(error);
+      });
+    });
+  },
+  removeBuggedEntries: function () {
+    var self = this;
+    return new Promise(function (resolve, reject) {
+      var entries = helper.readFile(uniqueUidMapperPath);
+      var bugged = [];
+      var removed = [];
+      for (var uid in entries) {
+        if (entries[uid].locales.indexOf(masterLanguage.code) === -1) {
+          bugged.push({
+            content_type: entries[uid].content_type,
+            uid: uid
+          });
+        }
+      }
+
+      return Promise.map(bugged, function (entry) {
+        var requestObject = {
+          uri: self.requestOptionTemplate.uri + entry.content_type + config.apis.entries + self.mappedUids[entry.uid],
+          method: 'DELETE',
+          qs: {
+            locale: masterLanguage.code
+          },
+          headers: self.requestOptionTemplate.headers,
+          json: true
+        };
+
+        return request(requestObject).then(function () {
+          removed.push(self.mappedUids[entry.uid]);
+          log.success('Removed bugged entry from master ' + JSON.stringify(entry));
+          return;
+        }).catch(function (error) {
+          log.error('Failed to remove bugged entry from master language');
+          log.error(error);
+          log.error(JSON.stringify(entry));
+          return;
+        });
+
+      }, {concurrency: 3}).then(function () {
+
+        for (var i = 0; i < bugged.length; i++) {
+          if (removed.indexOf(bugged[i].uid) !== -1) {
+            bugged.splice(i, 1);
+            i--;
+          }
+        }
+
+        helper.writeFile(path.join(entryMapperPath, 'removed-uids.json'), removed);
+        helper.writeFile(path.join(entryMapperPath, 'pending-uids.json'), bugged);
+
+        log.success('The stack has been eradicated from bugged entries!');
+        return resolve();
+      }).catch(function (error) {
+        // error while removing bugged entries from stack
+        return reject(error);
+      });
+    });
+  }
 };
 
-/**
- *
- * @param failed
- * @param field
- * @param entry
- * @param refEntries
- * @returns {*}
- */
-var updateFieldValue = function(failed, field, entry, refEntries){
-    if(refEntries && Object.keys(refEntries).length > 0) {
-        for(var key in entry) {
-            if(key == field.uid && entry[key]) {
-                for(var i = 0, total = entry[key].length; i < total; i++){
-                    if(refEntries[entry[key][i]]) {
-                        entry[key][i] = refEntries[entry[key][i]];
-                    } else {
-                        //errorLogger('Reference entry ' , entry[key][i] ,' is not present in mapper.');
-                        failed.push('Reference entry ' + entry[key][i]+ ' is not present in mapper.');
-                        failed.push('retry');
-                    }
-                }
-            } else if(typeof entry[key] == "object" && entry[key]) {
-                entry[key] = updateFieldValue(failed, field, entry[key], refEntries);
-            }
-        }
-    } else {
-        for(var key in entry){
-            if(key == field && entry[key]){
-                entry[key] = mapAssets(failed, entry[key]);
-            } else if(typeof entry[key] == "object" && entry[key]){
-                entry[key] = updateFieldValue(failed, field, entry[key]);
-            }
-        }
-    }
-    return entry;
-};
-
-/**
- *
- * @param failed
- * @param entry
- * @param contentType_uid
- * @param refEntries
- * @returns {*}
- */
-var updateEntry = function(failed, entry, contentType_uid, refEntries){
-    for(var i = 0, total = masterForms[contentType_uid]['fields']['file'].length; i < total && masterForms[contentType_uid]['fields']['file'][i]; i++){
-        entry = updateFieldValue(failed, masterForms[contentType_uid]['fields']['file'][i], entry);
-    }
-    for(var i = 0, total = masterForms[contentType_uid]['references'].length; i < total && masterForms[contentType_uid]['references'][i]; i++){
-        entry = updateFieldValue(failed, masterForms[contentType_uid]['references'][i], entry, refEntries);
-    }
-    // updating the url in RTE
-    var regexp = new RegExp('https://(dev-|stag-|)api.(built|contentstack).io/(.*?)/download(.*?)uid=([a-z0-9]{19})', 'g');
-
-    entry = (typeof entry == "object") ? JSON.stringify(entry) : entry;
-    var matches = entry.match(regexp);
-    if(matches){
-        for(var i = 0, total = matches.length; i < total;i++){
-            if(matches[i] !== null){
-                entry = entry.replace(matches[i], function(matched) {
-                    if(config.api_version!="v2" && matched.indexOf("/v2/")>-1){
-                        var spliced = _.split(matched, '/');
-                        var uniqueID = spliced[5];
-                        var uid = spliced[6].split("=");
-                        uid = uid[1];
-                        var oldAssetsV3URL = client.endPoint + "/assets/" + config.source_stack + "/" + uid + "/" + uniqueID + "/download";
-                        matched = oldAssetsV3URL;
-                    }
-                    if(matched && assetUrlMapper[matched]){
-                        return assetUrlMapper[matched];
-                    } else {
-                        failed.push(matched+" not present in the assetUrl mapper.");
-                    }
-                });
-
-                //Added new code to change data-sys-asset-uid
-
-                var old_uid = matches[i].split("=");
-                old_uid = old_uid[1];
-                var reg = new RegExp(old_uid,"g");
-                var new_id = assetMapper[old_uid];
-                entry = entry.replace(old_uid, new_id);
-
-            }
-        }
-    }
-    return (typeof entry == "string") ? JSON.parse(entry) : entry;
-};
-
-
-
-module.exports = ImportEntries;
+module.exports = new importEntries();
