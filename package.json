@@ -41,6 +41,7 @@
     "import-env": "node app.js environments"
   },
   "devDependencies": {
-    "eslint": "^4.19.1"
+    "debug": "4.1.0",
+    "eslint": "5.9.0"
   }
 }

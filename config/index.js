@@ -7,24 +7,22 @@ module.exports = {
   // not passing `locale` will migrate all the locales present
   // locales: ['fr-fr'],
   versioning: true,
-
   email: '',
   password: '',
-  // Stack api key, where you'd want the contents to be imported
   target_stack: '',
-
   // Folder to which contents are to be imported
-  data: '',
-
+  data: './_contents',
   // host endpoint
   host: 'api.contentstack.io',
+  // CDN endpoint
+  // cdn: 'cdn.contentstack.io',
   // port to connect at endpoint
   port: '443',
   // stack version
   api_version: 'v3',
   // if exisstingContentDir exists, no backup folder will be created
   // rather, its value(path) will be used instead
-  // useBackedupDir: '',
+  // useBackedupDir: './_backup_694',
   // is the no. of files to be copied/backed up concurrently
   // backupConcurrency: 10,
   modules: {
@@ -46,7 +44,7 @@ module.exports = {
       fileName: 'assets.json',
       // This is the total no. of asset objects fetched in each 'get assets' call
       limit: 100,
-
+      // @todo
       host: 'https://api.contentstack.io',
       validKeys: [
         'uid',
@@ -54,7 +52,7 @@ module.exports = {
         'url',
         'status'
       ],
-      assetBatchLimit: 3
+      assetBatchLimit: 5
     },
     content_types: {
       dirName: 'content_types',

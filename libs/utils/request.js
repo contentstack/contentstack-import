@@ -1,67 +1,85 @@
-var Promise = require('bluebird');
-var request = Promise.promisify(require('request'));
+/*!
+ * contentstack-express
+ * copyright (c) Contentstack
+ * MIT Licensed
+ */
+
+'use strict';
+/*!
+ * Module dependencies
+ */
+
+var Bluebird = require('bluebird');
+var request = Bluebird.promisify(require('request'));
+var debug = require('debug')('util:requests');
+var pkg = require('../../package');
+var MAX_RETRY_LIMIT = 5;
 
 config.headers = {
   api_key: config.api_key,
-  authtoken: client.authtoken
+  authtoken: client.authtoken,
+  'X-User-Agent': 'contentstack-import/' + pkg.version
 };
 
-module.exports = api = function (opts, retries) {
-  return new Promise(function (resolve, reject) {
+function validate(req) {
+  if (typeof req !== 'object') {
+    throw new Error(`Invalid params passed for request\n${JSON.stringify(arguments)}`);
+  }
+  if (typeof req.uri === 'undefined' && typeof req.url === 'undefined') {
+    throw new Error(`Missing uri in request!\n${JSON.stringify(req)}`);
+  }
+  if (typeof req.method === 'undefined') {
+    debug(`${req.uri || req.url} had no method, setting it as 'GET'`);
+    req.method = 'GET';
+  }
+  if (typeof req.json === 'undefined') {
+    req.json = true;
+  }
+  if (typeof req.headers === 'undefined') {
+    debug(`${req.uri || req.url} had no headers`);
+    req.headers = config.headers;
+  }
+}
+
+var makeCall = module.exports = function(req, RETRY) {
+  return new Bluebird(function (resolve, reject) {
+  var self = this;
     try {
-      if (typeof retries === 'number') {
-        retries++;
-      } else {
-        validate(opts);
-        retries = 0;
+      validate(req);
+      if (typeof RETRY !== 'number') {
+        RETRY = 1;
+      } else if (RETRY > MAX_RETRY_LIMIT) {
+        return reject(new Error(`Max retry limit exceeded!`));
       }
-      return request(opts).then(function (response) {
-        if (response.statusCode <= 399) {
-          try {
-            if (typeof response.body !== 'object') {
-              response.body = JSON.parse(response.body);
-            }
-          } catch (error) {
-            console.error('Unable to parse response body')
-          }
-          return resolve({
-            body: response.body,
-            status: response.statusCode
-          });
-        } else if (response.statusCode >= 400 && response.statusCode <= 499) {
-          return reject(response.body);
+      debug(`${req.method.toUpperCase()}: ${req.uri || req.url}`);
+      return request(req).then(function (response) {
+        if (response.statusCode >= 200 && response.statusCode <= 399) {
+          return resolve(null, response.body);
+        } else if (response.statusCode === 429) {
+          var timeDelay = Math.pow(Math.SQRT2, RETRY) * 100;
+          debug(`API rate limit exceeded.\nReceived ${response.statusCode} status\nBody ${JSON.stringify(response.body)}`);
+          debug(`Retrying ${req.uri || req.url} with ${timeDelay} sec delay`);
+          return setTimeout(function (req, RETRY) {
+            return makeCall(req, RETRY);
+          }, timeDelay, req, RETRY);
+        } else if (response.statusCode >= 500) {
+          // retry, with delay
+          var timeDelay = Math.pow(Math.SQRT2, RETRY) * 100;
+          debug(`Recevied ${response.statusCode} status\nBody ${JSON.stringify(response.body)}`);
+          debug(`Retrying ${req.uri || req.url} with ${timeDelay} sec delay`);
+          RETRY++;
+          return setTimeout(function (req, RETRY) {
+            return makeCall(req, RETRY);
+          }, timeDelay, req, RETRY);
         } else {
-          return setTimeout(function () {
-            return api(opts, retries).then(resolve).catch(reject);
-          }, Math.pow(2, retries) * 1000);
+          debug(`Request failed\n${JSON.stringify(req)}`);
+          debug(`Response received\n${JSON.stringify(response.body)}`);
+          return reject(response.body);
         }
-      }).catch(function (error) {
-        return reject(error);
-      });
+      }).catch(reject);
     } catch (error) {
+      debug(error);
       return reject(error);
     }
   });
 };
-
-function validate(options) {
-  if (!options.method) {
-    options.method = 'GET';
-  } else if (options.method && options.method.toLowerCase() === 'PUT' || options.method.toLowerCase() === 'POST') {
-    if (typeof options.json !== 'object' || typeof options.formData !== 'object') {
-      throw new Error('Please provide a JSON/FormData object for CMA calls');
-    }
-  }
-
-  if (!options.headers) {
-    options.headers = config.headers;
-  }
-
-  if (!options.host || !options.uri || !options.url) {
-    if (options.method.toLowerCase() === 'get') {
-      options.host = config.cdn;
-    } else {
-      options.host = config.host;
-    }
-  }
-}
