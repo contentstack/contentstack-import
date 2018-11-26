@@ -55,7 +55,7 @@ module.exports = function createClient(opts, callback) {
       console.log(chalk.yellow('Retrying account validation..'));
       return self.createClient(opts, callback);
     } else {
-      log.error('Failed to connect to Contentstack, due to:' + chalk.red(err || body));
+      log.error('Failed to connect to Contentstack, due to:' + chalk.red(err || JSON.stringify(body)));
       process.exit(1);
     }
   });
