@@ -1,7 +1,7 @@
 module.exports = {
   master_locale: { // master locale of the stack
-    name: 'Spain',
-    code: 'es-es' // mandatory
+    name: 'English - United States',
+    code: 'en-us' // mandatory
   },
   // pass locale, only to migrate entries from that locale
   // not passing `locale` will migrate all the locales present
