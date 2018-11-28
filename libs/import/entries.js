@@ -16,18 +16,14 @@ var ePath = path.resolve(config.data, eConfig.dirName);
 var ctPath = path.resolve(config.data, config.modules.content_types.dirName);
 var lPath = path.resolve(config.data, config.modules.locales.dirName, config.modules.locales.fileName);
 
-var mappedAssetUidPath = path.resolve(config.data, 'mapper', 'assets', 'uid-mapping.json');
-var mappedAssetUrlPath = path.resolve(config.data, 'mapper', 'assets', 'url-mapping.json');
-
-var entryMapperPath = path.resolve(config.data, 'mapper', 'entries');
-mkdirp.sync(entryMapperPath);
-
-var entryUidMapperPath = path.join(entryMapperPath, 'uid-mapping.json');
-var uniqueUidMapperPath = path.join(entryMapperPath, 'unique-mapping.json');
-var modifiedSchemaPath = path.join(entryMapperPath, 'modified-schemas.json');
-
-var createdEntriesWOUidPath = path.join(entryMapperPath, 'created-entries-wo-uid.json');
-var failedWOPath = path.join(entryMapperPath, 'failedWO.json');
+var mappedAssetUidPath;
+var mappedAssetUrlPath;
+var entryMapperPath;
+var entryUidMapperPath;
+var uniqueUidMapperPath;
+var modifiedSchemaPath;
+var createdEntriesWOUidPath;
+var failedWOPath;
 
 var masterLanguage = config.master_locale;
 var skipFiles = ['__master.json', '__priority.json', 'schema.json'];
@@ -35,6 +31,18 @@ var entryBatchLimit = eConfig.batchLimit || 16;
 
 function importEntries () {
   var self = this;
+  mappedAssetUidPath = path.resolve(config.data, 'mapper', 'assets', 'uid-mapping.json');
+  mappedAssetUrlPath = path.resolve(config.data, 'mapper', 'assets', 'url-mapping.json');
+
+  entryMapperPath = path.resolve(config.data, 'mapper', 'entries');
+  mkdirp.sync(entryMapperPath);
+
+  entryUidMapperPath = path.join(entryMapperPath, 'uid-mapping.json');
+  uniqueUidMapperPath = path.join(entryMapperPath, 'unique-mapping.json');
+  modifiedSchemaPath = path.join(entryMapperPath, 'modified-schemas.json');
+
+  createdEntriesWOUidPath = path.join(entryMapperPath, 'created-entries-wo-uid.json');
+  failedWOPath = path.join(entryMapperPath, 'failedWO.json');
   // Object of Schemas, referred to by their content type uid
   this.ctSchemas = {};
   // Array of content type uids, that have reference fields
