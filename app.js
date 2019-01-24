@@ -1,16 +1,9 @@
-/**
- * Pending - Bugs
- *   1. If same asset uid has multiple assets with same title (name), only the last one will be downloaded
- *   2. Extension support needs to added
- */
-
 /*!
 * Contentstack Import
 * Copyright (c) 2019 Contentstack LLC
 * MIT Licensed
 */
 
-var _ = require('lodash')
 var ncp = require('ncp');
 var Bluebird = require('bluebird');
 var fs = require('fs');
@@ -26,7 +19,7 @@ util.validateConfig(config);
 
 exports.getConfig = function () {
   return config;
-}
+};
 
 login(config).then(function () {
   var migrationBackupDirPath = path.join(process.cwd(), '_backup_' + Math.floor((Math.random() * 1000)));
@@ -36,7 +29,7 @@ login(config).then(function () {
 
     if (process.argv.length === 3) {
       var val = process.argv[2];
-      if (val && moduleNames.indexOf(val) > -1) {
+      if (val && types.indexOf(val) > -1) {
         var moduleImport = require('./lib/import/' + val);
         return moduleImport.start().then(function () {
           log.success(val + ' was imported successfully!');
@@ -52,14 +45,15 @@ login(config).then(function () {
       }
     } else if (process.argv.length === 2) {
       var counter = 0;
-      return Bluebird.map(types, function (type) {
-        var importModule = require('./libs/import/' + moduleNames[counter]);
+      return Bluebird.map(types, function () {
+        var importModule = require('./lib/import/' + types[counter]);
         counter++;
-        return importModule.start()
+        return importModule.start();
       }, { concurrency: 1}).then(function () {
         log.success('Import utility executed succesfully!');
         return;
       }).catch(function (error) {
+        console.error(error)
         log.error('Import utility failed while executing');
         log.error(error);
         return;
