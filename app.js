@@ -4,42 +4,45 @@
  *   2. Extension support needs to added
  */
 
+/*!
+* Contentstack Import
+* Copyright (c) 2019 Contentstack LLC
+* MIT Licensed
+*/
+
+var _ = require('lodash')
 var ncp = require('ncp');
-var Promise = require('bluebird');
+var Bluebird = require('bluebird');
 var fs = require('fs');
 var path = require('path');
 
-var createClient = require('./libs/utils/create-client');
+var util = require('./lib/util');
+var login = require('./lib/util/login');
+var log = require('./lib/util/log');
 var config = require('./config');
-var log = require('./libs/utils/log');
 
-var moduleImport;
+config = util.buildAppConfig(config);
+util.validateConfig(config);
 
-createClient(config, function (client) {
+exports.getConfig = function () {
+  return config;
+}
+
+login(config).then(function () {
   var migrationBackupDirPath = path.join(process.cwd(), '_backup_' + Math.floor((Math.random() * 1000)));
   return createBackup(migrationBackupDirPath).then(function (pth) {
     config.data = pth;
-    global.client = client;
-    global.config = config;
-    var moduleNames = [
-      'assets',
-      'locales',
-      'environments',
-      'content_types',
-      'entries'
-    ];
+    var types = config.modules.types;
 
     if (process.argv.length === 3) {
       var val = process.argv[2];
       if (val && moduleNames.indexOf(val) > -1) {
-        console.log('@val:' + val);
-        moduleImport = require('./libs/import/' + val);
-        console.log('@moduleImport' + moduleImport);
+        var moduleImport = require('./lib/import/' + val);
         return moduleImport.start().then(function () {
-          log.success('Import utility executed succesfully!');
+          log.success(val + ' was imported successfully!');
           return;
         }).catch(function (error) {
-          log.error('Import utility failed while executing');
+          log.error('Failed to import ' + val);
           log.error(error);
           return;
         });
@@ -49,23 +52,14 @@ createClient(config, function (client) {
       }
     } else if (process.argv.length === 2) {
       var counter = 0;
-      return Promise.map(moduleNames, function (moduleName) {
-        var _module_ = require('./libs/import/' + moduleNames[counter]);
-        return _module_.start().then(function () {
-          log.success(moduleName + ' has been imported succesfully!\n');
-          counter++;
-          return;
-        }).catch(function (error) {
-          log.error(moduleName + ' failed to get imported');
-          log.error(error);
-          counter++;
-          return;
-        });
+      return Bluebird.map(types, function (type) {
+        var importModule = require('./libs/import/' + moduleNames[counter]);
+        counter++;
+        return importModule.start()
       }, { concurrency: 1}).then(function () {
         log.success('Import utility executed succesfully!');
         return;
       }).catch(function (error) {
-        console.error(error);
         log.error('Import utility failed while executing');
         log.error(error);
         return;

@@ -1,10 +1,10 @@
 {
   "name": "contentstack-import",
-  "version": "0.0.2",
-  "description": "Export data from Contentstack",
+  "version": "1.0.1",
+  "description": "Import data into Contentstack",
   "homepage": "https://www.contentstack.com/",
   "author": {
-    "name": "Contentstack",
+    "name": "Contentstack Ecosystem",
     "url": "https://www.contentstack.com/"
   },
   "license": "MIT",

@@ -2,49 +2,56 @@
 
 Contentstack is a headless CMS with an API-first approach that puts content at the centre. It is designed to simplify the process of publication by separating code from content.
 
-This tool helps you to import content which is exported using contentstack-export utility into another stack. 
+This tool helps you to import content which is exported using [contentstack-export](https://github.com/contentstack/contentstack-export) utility into another stack. 
 
 ## Installation
 Download this project and install all the modules using following command.
+
 ```bash
-npm install
+$ npm install
 ```
 
 ## Configuration
 Update configuration details at config/index.js
-```js
-'master_locale': 
- {
-  'name': << your stack master locale >>,  // ex: 'English - United States'
-  'code': << stack master locale code >> // ex: 'en-us'
- }
-'email': << your registered e-mail address >>
-'password': << your account passwd >>
-'target_stack': << stack api key >> // the stack where the contents will be imported
-'data': << location of the exported content >> // ex: './_content'
-  ```
-## Usage
-Once all things are configured, you have to run following commands
 
-### Import all the modules
-```bash
-npm run import 
+```js
+{
+ master_locale: {
+  name: '', // Stack's master locale. ex: 'English - United States'
+  code: ''  // Stack master locale's code. ex: 'en-us'
+ },
+ email: '', // Your registered email id
+ password: '', // Account password
+ target_stack: '', // Stack api_key. This is the stack, where the data will be imported
+ data: '' // The data that's to be exported. This is generally the one exported via the contentstack-export utility. ex: '../contentstack-export/contents'. Kindly provide the relative path to the directory
 ```
 
-### Import specific modules
+## Usage
+Once all things are configured, you can run following commands
+
+1. Import all modules [ assets, locales, environments, content_types, entries ]
 ```bash
-npm run import assets
-npm run import locales
-npm run import env
-npm run import contenttypes
-npm run import entries
+$ npm run import
+```
+
+2. Import a specific module
+```bash
+$ npm run import-assets
+$ npm run import-locales
+$ npm run import-env
+$ npm run import-contenttypes
+$ npm run import-entries
 ```
 > Note: Before importing entries you must have to import locales, assets and content types.
 
 ### Known issues
 * It will migrate only latest published version of entry.
-* Does not support exporting Contentstack's Releases and Extensions
-* If 2 different versions of the same asset have the same file name, only the 1st imported will be imported
+* Does not support the following
+  * Roles
+  * Users
+  * Releases
+  * Extensions
+* If 2 different versions of the same asset have the same file name, only the 1st version will be imported
 
 ## License
 This project is licensed under MIT license
