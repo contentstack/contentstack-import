@@ -9,6 +9,7 @@ module.exports = {
       'assets',
       'locales',
       'environments',
+      'extensions',
       'content_types',
       'entries'
     ],
@@ -24,6 +25,10 @@ module.exports = {
     environments: {
       dirName: 'environments',
       fileName: 'environments.json'
+    },
+    extensions: {
+      dirName: 'extensions',
+      fileName: 'extensions.json'
     },
     assets: {
       dirName: 'assets',
@@ -73,7 +78,8 @@ module.exports = {
     assets: '/assets/',
     content_types: '/content_types/',
     entries: '/entries/',
-    folders: '/folders/'
+    folders: '/folders/',
+    extensions: '/extensions/'
   }
   // if exisstingContentDir exists, no backup folder will be created
   // rather, its value(path) will be used instead

@@ -1,0 +1,637 @@
+{"level":"info","message":"No folders were found at: /home/rohit/Test-import-export/contentstack-import/_backup_841/assets/folders.json","timestamp":"2019-03-18T13:57:41.763Z"}
+{"level":"info","message":"Completed asset import of batch no: 1","timestamp":"2019-03-18T13:57:43.914Z"}
+{"level":"info","message":"Completed asset import of batch no: 3","timestamp":"2019-03-18T13:57:46.089Z"}
+{"level":"info","message":"Completed asset import of batch no: 2","timestamp":"2019-03-18T13:57:48.740Z"}
+{"level":"info","message":"Asset import completed successfully!","timestamp":"2019-03-18T13:57:48.741Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-18T13:57:48.746Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-18T13:57:51.681Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-18T13:57:55.231Z"}
+{"level":"info","message":"No folders were found at: /home/rohit/Test-import-export/contentstack-import/_backup_160/assets/folders.json","timestamp":"2019-03-19T06:06:38.760Z"}
+{"level":"info","message":"Completed asset import of batch no: 1","timestamp":"2019-03-19T06:06:40.829Z"}
+{"level":"info","message":"Completed asset import of batch no: 3","timestamp":"2019-03-19T06:06:43.088Z"}
+{"level":"info","message":"Completed asset import of batch no: 2","timestamp":"2019-03-19T06:06:45.604Z"}
+{"level":"info","message":"Asset import completed successfully!","timestamp":"2019-03-19T06:06:45.605Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-19T06:06:45.609Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-19T06:06:47.291Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-19T06:06:50.569Z"}
+{"level":"info","message":"No folders were found at: /home/rohit/Test-import-export/contentstack-import/_backup_94/assets/folders.json","timestamp":"2019-03-19T06:08:57.244Z"}
+{"level":"info","message":"Completed asset import of batch no: 1","timestamp":"2019-03-19T06:08:59.614Z"}
+{"level":"info","message":"Completed asset import of batch no: 3","timestamp":"2019-03-19T06:09:01.865Z"}
+{"level":"info","message":"Completed asset import of batch no: 2","timestamp":"2019-03-19T06:09:04.156Z"}
+{"level":"info","message":"Asset import completed successfully!","timestamp":"2019-03-19T06:09:04.157Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-19T06:09:04.161Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-19T06:09:05.912Z"}
+{"level":"info","message":"No folders were found at: /home/rohit/Test-import-export/contentstack-import/_backup_492/assets/folders.json","timestamp":"2019-03-19T06:09:57.846Z"}
+{"level":"info","message":"Completed asset import of batch no: 1","timestamp":"2019-03-19T06:10:00.167Z"}
+{"level":"info","message":"Completed asset import of batch no: 3","timestamp":"2019-03-19T06:10:02.213Z"}
+{"level":"info","message":"Completed asset import of batch no: 2","timestamp":"2019-03-19T06:10:04.609Z"}
+{"level":"info","message":"Asset import completed successfully!","timestamp":"2019-03-19T06:10:04.609Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-19T06:10:04.612Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-19T06:10:06.300Z"}
+{"level":"info","message":"No folders were found at: /home/rohit/Test-import-export/contentstack-import/_backup_480/assets/folders.json","timestamp":"2019-03-19T06:31:47.137Z"}
+{"level":"info","message":"Completed asset import of batch no: 1","timestamp":"2019-03-19T06:31:49.209Z"}
+{"level":"info","message":"Completed asset import of batch no: 3","timestamp":"2019-03-19T06:31:51.579Z"}
+{"level":"info","message":"Completed asset import of batch no: 2","timestamp":"2019-03-19T06:31:53.876Z"}
+{"level":"info","message":"Asset import completed successfully!","timestamp":"2019-03-19T06:31:53.877Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-19T06:31:53.881Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-19T06:31:55.550Z"}
+{"level":"info","message":"No folders were found at: /home/rohit/Test-import-export/contentstack-import/_backup_805/assets/folders.json","timestamp":"2019-03-19T06:40:54.127Z"}
+{"level":"info","message":"Completed asset import of batch no: 1","timestamp":"2019-03-19T06:40:57.279Z"}
+{"level":"info","message":"Completed asset import of batch no: 3","timestamp":"2019-03-19T06:40:59.360Z"}
+{"level":"info","message":"Completed asset import of batch no: 2","timestamp":"2019-03-19T06:41:01.998Z"}
+{"level":"info","message":"Asset import completed successfully!","timestamp":"2019-03-19T06:41:01.999Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-19T06:41:02.003Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-19T06:41:03.699Z"}
+{"level":"info","message":"No folders were found at: /home/rohit/Test-import-export/contentstack-import/_backup_555/assets/folders.json","timestamp":"2019-03-19T06:45:39.757Z"}
+{"level":"info","message":"Completed asset import of batch no: 1","timestamp":"2019-03-19T06:45:42.462Z"}
+{"level":"info","message":"Completed asset import of batch no: 3","timestamp":"2019-03-19T06:45:44.777Z"}
+{"level":"info","message":"Completed asset import of batch no: 2","timestamp":"2019-03-19T06:45:47.374Z"}
+{"level":"info","message":"Asset import completed successfully!","timestamp":"2019-03-19T06:45:47.374Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-19T06:45:47.377Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-19T06:45:49.101Z"}
+{"level":"info","message":"No folders were found at: /home/rohit/Test-import-export/contentstack-import/_backup_898/assets/folders.json","timestamp":"2019-03-19T06:46:06.760Z"}
+{"level":"info","message":"Completed asset import of batch no: 1","timestamp":"2019-03-19T06:46:09.078Z"}
+{"level":"info","message":"Completed asset import of batch no: 3","timestamp":"2019-03-19T06:46:11.147Z"}
+{"level":"info","message":"Completed asset import of batch no: 2","timestamp":"2019-03-19T06:46:15.414Z"}
+{"level":"info","message":"Asset import completed successfully!","timestamp":"2019-03-19T06:46:15.415Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-19T06:46:15.419Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-19T06:46:17.133Z"}
+{"level":"info","message":"No folders were found at: /home/rohit/Test-import-export/contentstack-import/_backup_847/assets/folders.json","timestamp":"2019-03-19T06:56:23.443Z"}
+{"level":"info","message":"Completed asset import of batch no: 1","timestamp":"2019-03-19T06:56:26.860Z"}
+{"level":"info","message":"Completed asset import of batch no: 3","timestamp":"2019-03-19T06:56:30.415Z"}
+{"level":"info","message":"Completed asset import of batch no: 2","timestamp":"2019-03-19T06:56:34.503Z"}
+{"level":"info","message":"Asset import completed successfully!","timestamp":"2019-03-19T06:56:34.503Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-19T06:56:34.506Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-19T06:56:38.702Z"}
+{"level":"info","message":"No folders were found at: /home/rohit/Test-import-export/contentstack-import/_backup_568/assets/folders.json","timestamp":"2019-03-19T06:59:02.031Z"}
+{"level":"info","message":"Completed asset import of batch no: 1","timestamp":"2019-03-19T06:59:04.377Z"}
+{"level":"info","message":"Completed asset import of batch no: 3","timestamp":"2019-03-19T06:59:07.630Z"}
+{"level":"info","message":"Completed asset import of batch no: 2","timestamp":"2019-03-19T06:59:10.236Z"}
+{"level":"info","message":"Asset import completed successfully!","timestamp":"2019-03-19T06:59:10.236Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-19T06:59:10.240Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-19T06:59:11.901Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-19T06:59:11.910Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-19T06:59:15.869Z"}
+{"level":"info","message":"No folders were found at: /home/rohit/Test-import-export/contentstack-import/_backup_864/assets/folders.json","timestamp":"2019-03-19T07:01:13.822Z"}
+{"level":"info","message":"Completed asset import of batch no: 1","timestamp":"2019-03-19T07:01:20.220Z"}
+{"level":"info","message":"Completed asset import of batch no: 3","timestamp":"2019-03-19T07:01:23.967Z"}
+{"level":"info","message":"Completed asset import of batch no: 2","timestamp":"2019-03-19T07:01:27.982Z"}
+{"level":"info","message":"Asset import completed successfully!","timestamp":"2019-03-19T07:01:27.982Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-19T07:01:27.987Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-19T07:01:30.704Z"}
+{"level":"info","message":"No folders were found at: /home/rohit/Test-import-export/contentstack-import/_backup_386/assets/folders.json","timestamp":"2019-03-19T07:05:58.904Z"}
+{"level":"info","message":"Completed asset import of batch no: 1","timestamp":"2019-03-19T07:06:01.864Z"}
+{"level":"info","message":"Completed asset import of batch no: 3","timestamp":"2019-03-19T07:06:05.160Z"}
+{"level":"info","message":"Completed asset import of batch no: 2","timestamp":"2019-03-19T07:06:07.720Z"}
+{"level":"info","message":"Asset import completed successfully!","timestamp":"2019-03-19T07:06:07.720Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-19T07:06:07.726Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-19T07:06:09.394Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-19T07:06:09.402Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-19T07:06:12.760Z"}
+{"level":"info","message":"No folders were found at: /home/rohit/Test-import-export/contentstack-import/_backup_892/assets/folders.json","timestamp":"2019-03-19T07:08:20.963Z"}
+{"level":"info","message":"Completed asset import of batch no: 1","timestamp":"2019-03-19T07:08:23.636Z"}
+{"level":"info","message":"Completed asset import of batch no: 3","timestamp":"2019-03-19T07:08:27.247Z"}
+{"level":"info","message":"No folders were found at: /home/rohit/Test-import-export/contentstack-import/_backup_88/assets/folders.json","timestamp":"2019-03-19T07:09:20.292Z"}
+{"level":"info","message":"Completed asset import of batch no: 1","timestamp":"2019-03-19T07:09:25.376Z"}
+{"level":"info","message":"Completed asset import of batch no: 3","timestamp":"2019-03-19T07:09:31.589Z"}
+{"level":"info","message":"Completed asset import of batch no: 2","timestamp":"2019-03-19T07:09:35.199Z"}
+{"level":"info","message":"Asset import completed successfully!","timestamp":"2019-03-19T07:09:35.199Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-19T07:09:35.203Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-19T07:09:37.200Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-19T07:09:37.207Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-19T07:09:42.515Z"}
+{"level":"info","message":"No folders were found at: /home/rohit/Test-import-export/contentstack-import/_backup_721/assets/folders.json","timestamp":"2019-03-19T07:11:50.040Z"}
+{"level":"info","message":"Completed asset import of batch no: 1","timestamp":"2019-03-19T07:11:53.311Z"}
+{"level":"info","message":"Completed asset import of batch no: 3","timestamp":"2019-03-19T07:11:57.608Z"}
+{"level":"info","message":"Completed asset import of batch no: 2","timestamp":"2019-03-19T07:12:00.181Z"}
+{"level":"info","message":"Asset import completed successfully!","timestamp":"2019-03-19T07:12:00.181Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-19T07:12:00.186Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-19T07:12:01.845Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-19T07:12:01.855Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-19T07:12:07.049Z"}
+{"level":"info","message":"No folders were found at: /home/rohit/Test-import-export/contentstack-import/_backup_742/assets/folders.json","timestamp":"2019-03-19T07:14:18.962Z"}
+{"level":"info","message":"Completed asset import of batch no: 1","timestamp":"2019-03-19T07:14:21.457Z"}
+{"level":"info","message":"Completed asset import of batch no: 3","timestamp":"2019-03-19T07:14:23.746Z"}
+{"level":"info","message":"Completed asset import of batch no: 2","timestamp":"2019-03-19T07:14:26.037Z"}
+{"level":"info","message":"Asset import completed successfully!","timestamp":"2019-03-19T07:14:26.037Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-19T07:14:26.039Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-19T07:14:27.708Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-19T07:14:29.434Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-19T07:14:32.724Z"}
+{"level":"info","message":"No folders were found at: /home/rohit/Test-import-export/contentstack-import/_backup_91/assets/folders.json","timestamp":"2019-03-19T07:19:19.154Z"}
+{"level":"info","message":"Completed asset import of batch no: 1","timestamp":"2019-03-19T07:19:21.471Z"}
+{"level":"info","message":"Completed asset import of batch no: 3","timestamp":"2019-03-19T07:19:23.769Z"}
+{"level":"info","message":"Completed asset import of batch no: 2","timestamp":"2019-03-19T07:19:26.339Z"}
+{"level":"info","message":"Asset import completed successfully!","timestamp":"2019-03-19T07:19:26.340Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-19T07:19:26.344Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-19T07:19:27.966Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-19T07:19:29.645Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-19T07:19:33.786Z"}
+{"level":"info","message":"No folders were found at: /home/rohit/Test-import-export/contentstack-import/_backup_861/assets/folders.json","timestamp":"2019-03-19T07:21:12.348Z"}
+{"level":"info","message":"Completed asset import of batch no: 1","timestamp":"2019-03-19T07:21:14.532Z"}
+{"level":"info","message":"Completed asset import of batch no: 3","timestamp":"2019-03-19T07:21:16.881Z"}
+{"level":"info","message":"Completed asset import of batch no: 2","timestamp":"2019-03-19T07:21:19.434Z"}
+{"level":"info","message":"Asset import completed successfully!","timestamp":"2019-03-19T07:21:19.434Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-19T07:21:19.438Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-19T07:21:22.784Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-19T07:21:24.465Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-19T07:21:27.971Z"}
+{"level":"info","message":"No folders were found at: /home/rohit/Test-import-export/contentstack-import/_backup_697/assets/folders.json","timestamp":"2019-03-19T07:23:10.742Z"}
+{"level":"info","message":"Completed asset import of batch no: 1","timestamp":"2019-03-19T07:23:13.044Z"}
+{"level":"info","message":"Completed asset import of batch no: 3","timestamp":"2019-03-19T07:23:15.374Z"}
+{"level":"info","message":"Completed asset import of batch no: 2","timestamp":"2019-03-19T07:23:18.040Z"}
+{"level":"info","message":"Asset import completed successfully!","timestamp":"2019-03-19T07:23:18.041Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-19T07:23:18.045Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-19T07:23:19.726Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-19T07:23:21.350Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-19T07:23:24.566Z"}
+{"level":"info","message":"No folders were found at: /home/rohit/Test-import-export/contentstack-import/_backup_104/assets/folders.json","timestamp":"2019-03-19T07:36:05.095Z"}
+{"level":"info","message":"Completed asset import of batch no: 1","timestamp":"2019-03-19T07:36:07.401Z"}
+{"level":"info","message":"Completed asset import of batch no: 3","timestamp":"2019-03-19T07:36:09.721Z"}
+{"level":"info","message":"Completed asset import of batch no: 2","timestamp":"2019-03-19T07:36:12.328Z"}
+{"level":"info","message":"Asset import completed successfully!","timestamp":"2019-03-19T07:36:12.329Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-19T07:36:12.333Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-19T07:36:14.022Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-19T07:36:15.668Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-19T07:36:18.959Z"}
+{"level":"info","message":"No folders were found at: /home/rohit/Test-import-export/contentstack-import/_backup_700/assets/folders.json","timestamp":"2019-03-19T07:37:51.547Z"}
+{"level":"info","message":"Completed asset import of batch no: 1","timestamp":"2019-03-19T07:38:03.665Z"}
+{"level":"info","message":"Completed asset import of batch no: 3","timestamp":"2019-03-19T07:38:06.034Z"}
+{"level":"info","message":"Completed asset import of batch no: 2","timestamp":"2019-03-19T07:38:11.372Z"}
+{"level":"info","message":"Asset import completed successfully!","timestamp":"2019-03-19T07:38:11.373Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-19T07:38:11.377Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-19T07:38:13.062Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-19T07:38:15.850Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-19T07:38:19.249Z"}
+{"level":"info","message":"No folders were found at: /home/rohit/Test-import-export/contentstack-import/_backup_96/assets/folders.json","timestamp":"2019-03-19T07:58:13.334Z"}
+{"level":"info","message":"Completed asset import of batch no: 1","timestamp":"2019-03-19T07:58:15.574Z"}
+{"level":"info","message":"Completed asset import of batch no: 3","timestamp":"2019-03-19T07:58:17.569Z"}
+{"level":"info","message":"Completed asset import of batch no: 2","timestamp":"2019-03-19T07:58:20.121Z"}
+{"level":"info","message":"Asset import completed successfully!","timestamp":"2019-03-19T07:58:20.122Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-19T07:58:20.126Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-19T07:58:21.736Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-19T07:58:23.409Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-19T07:58:26.707Z"}
+{"level":"info","message":"No folders were found at: /home/rohit/Test-import-export/contentstack-import/_backup_541/assets/folders.json","timestamp":"2019-03-19T08:09:59.512Z"}
+{"level":"info","message":"Completed asset import of batch no: 1","timestamp":"2019-03-19T08:10:01.876Z"}
+{"level":"info","message":"Completed asset import of batch no: 3","timestamp":"2019-03-19T08:10:04.712Z"}
+{"level":"info","message":"Completed asset import of batch no: 2","timestamp":"2019-03-19T08:10:07.666Z"}
+{"level":"info","message":"Asset import completed successfully!","timestamp":"2019-03-19T08:10:07.666Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-19T08:10:07.670Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-19T08:10:09.304Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-19T08:10:11.009Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-19T08:10:14.234Z"}
+{"level":"info","message":"No folders were found at: /home/rohit/Test-import-export/contentstack-import/_backup_365/assets/folders.json","timestamp":"2019-03-19T08:14:18.938Z"}
+{"level":"info","message":"Completed asset import of batch no: 1","timestamp":"2019-03-19T08:14:22.135Z"}
+{"level":"info","message":"Completed asset import of batch no: 3","timestamp":"2019-03-19T08:14:24.519Z"}
+{"level":"info","message":"Completed asset import of batch no: 2","timestamp":"2019-03-19T08:14:27.065Z"}
+{"level":"info","message":"Asset import completed successfully!","timestamp":"2019-03-19T08:14:27.066Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-19T08:14:27.080Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-19T08:14:28.742Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-19T08:14:30.379Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-19T08:14:33.677Z"}
+{"level":"info","message":"No folders were found at: /home/rohit/Test-import-export/contentstack-import/_backup_560/assets/folders.json","timestamp":"2019-03-19T08:17:01.828Z"}
+{"level":"info","message":"Completed asset import of batch no: 1","timestamp":"2019-03-19T08:17:03.869Z"}
+{"level":"info","message":"Completed asset import of batch no: 3","timestamp":"2019-03-19T08:17:05.994Z"}
+{"level":"info","message":"Completed asset import of batch no: 2","timestamp":"2019-03-19T08:17:08.544Z"}
+{"level":"info","message":"Asset import completed successfully!","timestamp":"2019-03-19T08:17:08.544Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-19T08:17:08.546Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-19T08:17:10.202Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-19T08:17:11.916Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-19T08:17:16.483Z"}
+{"level":"info","message":"No folders were found at: /home/rohit/Test-import-export/contentstack-import/_backup_865/assets/folders.json","timestamp":"2019-03-19T08:19:06.929Z"}
+{"level":"info","message":"Completed asset import of batch no: 1","timestamp":"2019-03-19T08:19:09.366Z"}
+{"level":"info","message":"Completed asset import of batch no: 3","timestamp":"2019-03-19T08:19:11.680Z"}
+{"level":"info","message":"Completed asset import of batch no: 2","timestamp":"2019-03-19T08:19:13.998Z"}
+{"level":"info","message":"Asset import completed successfully!","timestamp":"2019-03-19T08:19:13.998Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-19T08:19:14.001Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-19T08:19:15.674Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-19T08:19:17.366Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-19T08:19:20.673Z"}
+{"level":"info","message":"No folders were found at: /home/rohit/Test-import-export/contentstack-import/_backup_497/assets/folders.json","timestamp":"2019-03-19T09:32:16.503Z"}
+{"level":"info","message":"Completed asset import of batch no: 1","timestamp":"2019-03-19T09:32:19.920Z"}
+{"level":"info","message":"Completed asset import of batch no: 3","timestamp":"2019-03-19T09:32:22.258Z"}
+{"level":"info","message":"Completed asset import of batch no: 2","timestamp":"2019-03-19T09:32:24.893Z"}
+{"level":"info","message":"Asset import completed successfully!","timestamp":"2019-03-19T09:32:24.893Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-19T09:32:24.898Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-19T09:32:26.532Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-19T09:32:28.285Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-19T09:32:32.301Z"}
+{"level":"info","message":"No folders were found at: /home/rohit/Test-import-export/contentstack-import/_backup_430/assets/folders.json","timestamp":"2019-03-19T09:34:20.946Z"}
+{"level":"info","message":"Completed asset import of batch no: 1","timestamp":"2019-03-19T09:34:25.969Z"}
+{"level":"info","message":"Completed asset import of batch no: 3","timestamp":"2019-03-19T09:34:28.274Z"}
+{"level":"info","message":"Completed asset import of batch no: 2","timestamp":"2019-03-19T09:34:31.094Z"}
+{"level":"info","message":"Asset import completed successfully!","timestamp":"2019-03-19T09:34:31.095Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-19T09:34:31.099Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-19T09:34:32.716Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-19T09:34:34.409Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-19T09:34:37.848Z"}
+{"level":"info","message":"No folders were found at: /home/rohit/Test-import-export/contentstack-import/_backup_874/assets/folders.json","timestamp":"2019-03-19T09:41:36.607Z"}
+{"level":"info","message":"Completed asset import of batch no: 1","timestamp":"2019-03-19T09:41:38.648Z"}
+{"level":"info","message":"Completed asset import of batch no: 3","timestamp":"2019-03-19T09:41:41.479Z"}
+{"level":"info","message":"Completed asset import of batch no: 2","timestamp":"2019-03-19T09:41:43.999Z"}
+{"level":"info","message":"Asset import completed successfully!","timestamp":"2019-03-19T09:41:44.000Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-19T09:41:44.004Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-19T09:41:45.670Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-19T09:41:49.146Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-19T09:41:52.539Z"}
+{"level":"info","message":"No folders were found at: /home/rohit/Test-import-export/contentstack-import/_backup_886/assets/folders.json","timestamp":"2019-03-19T11:55:11.761Z"}
+{"level":"info","message":"Completed asset import of batch no: 1","timestamp":"2019-03-19T11:55:13.840Z"}
+{"level":"info","message":"Completed asset import of batch no: 3","timestamp":"2019-03-19T11:55:15.904Z"}
+{"level":"info","message":"Completed asset import of batch no: 2","timestamp":"2019-03-19T11:55:18.179Z"}
+{"level":"info","message":"Asset import completed successfully!","timestamp":"2019-03-19T11:55:18.179Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-19T11:55:18.182Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-19T11:55:21.002Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-19T11:55:22.691Z"}
+{"level":"info","message":"No folders were found at: /home/rohit/Test-import-export/contentstack-import/_backup_757/assets/folders.json","timestamp":"2019-03-19T12:05:29.232Z"}
+{"level":"info","message":"Completed asset import of batch no: 1","timestamp":"2019-03-19T12:05:31.389Z"}
+{"level":"info","message":"Completed asset import of batch no: 3","timestamp":"2019-03-19T12:05:33.468Z"}
+{"level":"info","message":"Completed asset import of batch no: 2","timestamp":"2019-03-19T12:05:35.816Z"}
+{"level":"info","message":"Asset import completed successfully!","timestamp":"2019-03-19T12:05:35.816Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-19T12:05:35.821Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-19T12:05:37.551Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-19T12:05:39.262Z"}
+{"level":"info","message":"No folders were found at: /home/rohit/Test-import-export/contentstack-import/_backup_536/assets/folders.json","timestamp":"2019-03-19T12:07:21.507Z"}
+{"level":"info","message":"Completed asset import of batch no: 1","timestamp":"2019-03-19T12:07:23.859Z"}
+{"level":"info","message":"Completed asset import of batch no: 3","timestamp":"2019-03-19T12:07:26.233Z"}
+{"level":"info","message":"Completed asset import of batch no: 2","timestamp":"2019-03-19T12:07:28.530Z"}
+{"level":"info","message":"Asset import completed successfully!","timestamp":"2019-03-19T12:07:28.531Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-19T12:07:28.535Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-19T12:07:30.211Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-19T12:07:32.322Z"}
+{"level":"info","message":"No folders were found at: /home/rohit/Test-import-export/contentstack-import/_backup_456/assets/folders.json","timestamp":"2019-03-19T12:07:42.888Z"}
+{"level":"info","message":"Completed asset import of batch no: 1","timestamp":"2019-03-19T12:07:45.284Z"}
+{"level":"info","message":"Completed asset import of batch no: 3","timestamp":"2019-03-19T12:07:47.584Z"}
+{"level":"info","message":"Completed asset import of batch no: 2","timestamp":"2019-03-19T12:07:50.203Z"}
+{"level":"info","message":"Asset import completed successfully!","timestamp":"2019-03-19T12:07:50.204Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-19T12:07:50.208Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-19T12:07:51.901Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-19T12:07:53.609Z"}
+{"level":"info","message":"No folders were found at: /home/rohit/Test-import-export/contentstack-import/_backup_373/assets/folders.json","timestamp":"2019-03-19T12:13:27.665Z"}
+{"level":"info","message":"Completed asset import of batch no: 1","timestamp":"2019-03-19T12:13:31.168Z"}
+{"level":"info","message":"Completed asset import of batch no: 3","timestamp":"2019-03-19T12:13:33.406Z"}
+{"level":"info","message":"Completed asset import of batch no: 2","timestamp":"2019-03-19T12:13:36.338Z"}
+{"level":"info","message":"Asset import completed successfully!","timestamp":"2019-03-19T12:13:36.338Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-19T12:13:36.382Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-19T12:13:38.038Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-19T12:13:40.240Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-19T12:18:00.830Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-19T12:18:02.506Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-19T12:18:04.441Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-19T12:21:54.239Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-19T12:21:55.899Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-19T12:21:57.660Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-19T12:23:05.782Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-19T12:23:07.771Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-19T12:23:09.459Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-19T12:25:36.988Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-19T12:25:38.623Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-19T12:25:40.362Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-19T12:40:19.842Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-19T12:40:21.514Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-19T12:40:23.186Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-19T12:50:19.246Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-19T12:50:20.944Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-19T12:50:22.626Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-19T12:51:03.490Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-19T12:51:05.145Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-19T12:51:06.885Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-19T12:52:01.460Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-19T12:52:06.080Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-19T12:52:07.733Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-19T12:56:38.340Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-19T12:56:40.057Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-19T12:56:41.847Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-19T12:58:14.673Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-19T12:58:16.569Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-19T12:58:18.218Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-19T13:16:27.092Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-19T13:16:28.760Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-19T13:16:30.560Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-19T13:17:17.177Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-19T13:17:18.852Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-19T13:17:20.554Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-19T13:20:54.526Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-19T13:20:56.197Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-19T13:20:57.823Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-19T13:22:08.170Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-19T13:22:10.963Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-19T13:22:12.695Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-19T13:42:31.943Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-19T13:42:33.618Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-19T13:42:35.258Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-20T05:57:27.348Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-20T05:57:29.054Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-20T05:57:30.674Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-20T06:02:58.785Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-20T06:03:00.450Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-20T06:03:02.187Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-20T06:09:57.071Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-20T06:09:58.675Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-20T06:10:00.302Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-20T06:10:16.343Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-20T06:10:18.000Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-20T06:10:19.694Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-20T06:12:02.375Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-20T06:12:04.340Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-20T06:12:06.028Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-20T06:33:00.413Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-20T09:42:22.871Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-20T09:46:51.361Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-20T09:50:51.193Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-20T09:52:41.854Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-20T09:52:43.982Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-20T09:55:00.550Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-20T10:29:53.713Z"}
+{"level":"info","message":"product was updated successfully!","timestamp":"2019-03-20T10:29:57.997Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-20T10:29:57.998Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-20T10:59:24.596Z"}
+{"level":"info","message":"product was updated successfully!","timestamp":"2019-03-20T10:59:28.813Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-20T10:59:28.814Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-20T11:00:19.717Z"}
+{"level":"info","message":"product was updated successfully!","timestamp":"2019-03-20T11:00:23.116Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-20T11:00:23.117Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-20T12:03:23.183Z"}
+{"level":"info","message":"product was updated successfully!","timestamp":"2019-03-20T12:03:26.728Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-20T12:03:26.729Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-20T12:07:26.598Z"}
+{"level":"info","message":"product was updated successfully!","timestamp":"2019-03-20T12:07:30.004Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-20T12:07:30.005Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-20T12:09:11.979Z"}
+{"level":"info","message":"product was updated successfully!","timestamp":"2019-03-20T12:09:16.184Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-20T12:09:16.185Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-20T12:10:57.537Z"}
+{"level":"info","message":"product was updated successfully!","timestamp":"2019-03-20T12:11:00.927Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-20T12:11:00.928Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-20T12:15:31.630Z"}
+{"level":"info","message":"product was updated successfully!","timestamp":"2019-03-20T12:15:34.962Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-20T12:15:34.963Z"}
+{"level":"info","message":"Entries created successfully in product content type in en-us locale!","timestamp":"2019-03-20T12:15:38.444Z"}
+{"level":"info","message":"Entries created successfully in 'en-us' language","timestamp":"2019-03-20T12:15:38.444Z"}
+{"level":"info","message":"No entries without mapped uid found!","timestamp":"2019-03-20T12:15:38.445Z"}
+{"level":"info","message":"Imported entries in 'en-us' language successfully!","timestamp":"2019-03-20T12:15:38.448Z"}
+{"level":"info","message":"Successfully imported 'en-us' entries!","timestamp":"2019-03-20T12:15:38.449Z"}
+{"level":"info","message":"Re-modified content type schemas to their original form!","timestamp":"2019-03-20T12:15:40.925Z"}
+{"level":"info","message":"The stack has been eradicated from bugged entries!","timestamp":"2019-03-20T12:15:40.927Z"}
+{"level":"info","message":"Entries imported successfully!","timestamp":"2019-03-20T12:15:40.927Z"}
+{"level":"info","message":"Import utility executed succesfully!","timestamp":"2019-03-20T12:15:40.928Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-20T13:01:00.531Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-20T13:01:03.859Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-22T09:44:27.752Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-22T09:44:31.114Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-22T10:03:28.295Z"}
+{"level":"info","message":"product was updated successfully!","timestamp":"2019-03-22T10:03:31.688Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-22T10:03:31.689Z"}
+{"level":"info","message":"Entries created successfully in product content type in en-us locale!","timestamp":"2019-03-22T10:03:35.214Z"}
+{"level":"info","message":"Entries created successfully in 'en-us' language","timestamp":"2019-03-22T10:03:35.215Z"}
+{"level":"info","message":"No entries without mapped uid found!","timestamp":"2019-03-22T10:03:35.216Z"}
+{"level":"info","message":"Imported entries in 'en-us' language successfully!","timestamp":"2019-03-22T10:03:35.220Z"}
+{"level":"info","message":"Successfully imported 'en-us' entries!","timestamp":"2019-03-22T10:03:35.220Z"}
+{"level":"info","message":"Re-modified content type schemas to their original form!","timestamp":"2019-03-22T10:03:36.896Z"}
+{"level":"info","message":"The stack has been eradicated from bugged entries!","timestamp":"2019-03-22T10:03:36.899Z"}
+{"level":"info","message":"Entries imported successfully!","timestamp":"2019-03-22T10:03:36.899Z"}
+{"level":"info","message":"Import utility executed succesfully!","timestamp":"2019-03-22T10:03:36.900Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-22T10:41:42.911Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-22T10:42:50.934Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-22T10:42:52.703Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-22T10:44:31.153Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-22T10:44:32.810Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-22T10:48:57.811Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-22T10:48:59.438Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-22T10:50:38.366Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-22T10:50:39.998Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-22T11:01:45.359Z"}
+{"level":"info","message":"product was updated successfully!","timestamp":"2019-03-22T11:01:48.741Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-22T11:01:48.742Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-22T11:48:10.153Z"}
+{"level":"info","message":"product was updated successfully!","timestamp":"2019-03-22T11:48:13.634Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-22T11:48:13.635Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-22T11:51:16.003Z"}
+{"level":"info","message":"product was updated successfully!","timestamp":"2019-03-22T11:51:21.272Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-22T11:51:21.273Z"}
+{"level":"info","message":"Entries created successfully in product content type in en-us locale!","timestamp":"2019-03-22T11:51:24.716Z"}
+{"level":"info","message":"Entries created successfully in 'en-us' language","timestamp":"2019-03-22T11:51:24.717Z"}
+{"level":"info","message":"No entries without mapped uid found!","timestamp":"2019-03-22T11:51:24.717Z"}
+{"level":"info","message":"Imported entries in 'en-us' language successfully!","timestamp":"2019-03-22T11:51:24.719Z"}
+{"level":"info","message":"Successfully imported 'en-us' entries!","timestamp":"2019-03-22T11:51:24.719Z"}
+{"level":"info","message":"Re-modified content type schemas to their original form!","timestamp":"2019-03-22T11:51:26.402Z"}
+{"level":"info","message":"The stack has been eradicated from bugged entries!","timestamp":"2019-03-22T11:51:26.403Z"}
+{"level":"info","message":"Entries imported successfully!","timestamp":"2019-03-22T11:51:26.404Z"}
+{"level":"info","message":"Import utility executed succesfully!","timestamp":"2019-03-22T11:51:26.404Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-22T12:32:59.280Z"}
+{"level":"info","message":"product_two was updated successfully!","timestamp":"2019-03-22T12:33:03.475Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-22T12:33:03.476Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-22T12:57:48.169Z"}
+{"level":"info","message":"product_two was updated successfully!","timestamp":"2019-03-22T12:57:51.560Z"}
+{"level":"info","message":"product was updated successfully!","timestamp":"2019-03-22T12:57:52.717Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-22T12:57:52.718Z"}
+{"level":"info","message":"Entries created successfully in product content type in en-us locale!","timestamp":"2019-03-22T12:57:56.188Z"}
+{"level":"info","message":"Entries created successfully in product_two content type in en-us locale!","timestamp":"2019-03-22T12:57:56.190Z"}
+{"level":"info","message":"Entries created successfully in 'en-us' language","timestamp":"2019-03-22T12:57:56.190Z"}
+{"level":"info","message":"No entries without mapped uid found!","timestamp":"2019-03-22T12:57:56.191Z"}
+{"level":"info","message":"Imported entries in 'en-us' language successfully!","timestamp":"2019-03-22T12:57:56.193Z"}
+{"level":"info","message":"Successfully imported 'en-us' entries!","timestamp":"2019-03-22T12:57:56.194Z"}
+{"level":"info","message":"Re-modified content type schemas to their original form!","timestamp":"2019-03-22T12:58:01.413Z"}
+{"level":"info","message":"The stack has been eradicated from bugged entries!","timestamp":"2019-03-22T12:58:01.415Z"}
+{"level":"info","message":"Entries imported successfully!","timestamp":"2019-03-22T12:58:01.416Z"}
+{"level":"info","message":"Import utility executed succesfully!","timestamp":"2019-03-22T12:58:01.417Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-25T13:19:27.556Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-25T13:19:29.286Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-25T13:29:27.996Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-25T13:29:30.634Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-25T13:31:46.462Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-25T13:31:48.557Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-25T13:35:42.324Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-25T13:35:44.099Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-25T13:37:17.780Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-25T13:38:25.048Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-25T13:38:26.714Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-25T13:43:00.992Z"}
+{"level":"info","message":"product_two was updated successfully!","timestamp":"2019-03-25T13:43:04.387Z"}
+{"level":"info","message":"product was updated successfully!","timestamp":"2019-03-25T13:43:04.411Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-25T13:43:04.411Z"}
+{"level":"info","message":"Entries created successfully in product content type in en-us locale!","timestamp":"2019-03-25T13:43:07.760Z"}
+{"level":"info","message":"Entries created successfully in product_two content type in en-us locale!","timestamp":"2019-03-25T13:43:07.761Z"}
+{"level":"info","message":"Entries created successfully in 'en-us' language","timestamp":"2019-03-25T13:43:07.761Z"}
+{"level":"info","message":"No entries without mapped uid found!","timestamp":"2019-03-25T13:43:07.761Z"}
+{"level":"info","message":"Imported entries in 'en-us' language successfully!","timestamp":"2019-03-25T13:43:07.763Z"}
+{"level":"info","message":"Successfully imported 'en-us' entries!","timestamp":"2019-03-25T13:43:07.763Z"}
+{"level":"info","message":"Re-modified content type schemas to their original form!","timestamp":"2019-03-25T13:43:09.359Z"}
+{"level":"info","message":"The stack has been eradicated from bugged entries!","timestamp":"2019-03-25T13:43:09.361Z"}
+{"level":"info","message":"Entries imported successfully!","timestamp":"2019-03-25T13:43:09.361Z"}
+{"level":"info","message":"Import utility executed succesfully!","timestamp":"2019-03-25T13:43:09.361Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-27T06:12:14.180Z"}
+{"level":"info","message":"product_two was updated successfully!","timestamp":"2019-03-27T06:12:17.495Z"}
+{"level":"info","message":"product was updated successfully!","timestamp":"2019-03-27T06:12:17.521Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-27T06:12:17.522Z"}
+{"level":"info","message":"Entries created successfully in product content type in en-us locale!","timestamp":"2019-03-27T06:12:21.052Z"}
+{"level":"info","message":"Entries created successfully in product_two content type in en-us locale!","timestamp":"2019-03-27T06:12:21.053Z"}
+{"level":"info","message":"Entries created successfully in 'en-us' language","timestamp":"2019-03-27T06:12:21.054Z"}
+{"level":"info","message":"No entries without mapped uid found!","timestamp":"2019-03-27T06:12:21.055Z"}
+{"level":"info","message":"Imported entries in 'en-us' language successfully!","timestamp":"2019-03-27T06:12:21.058Z"}
+{"level":"info","message":"Successfully imported 'en-us' entries!","timestamp":"2019-03-27T06:12:21.058Z"}
+{"level":"info","message":"Re-modified content type schemas to their original form!","timestamp":"2019-03-27T06:12:22.692Z"}
+{"level":"info","message":"The stack has been eradicated from bugged entries!","timestamp":"2019-03-27T06:12:22.694Z"}
+{"level":"info","message":"Entries imported successfully!","timestamp":"2019-03-27T06:12:22.694Z"}
+{"level":"info","message":"Import utility executed succesfully!","timestamp":"2019-03-27T06:12:22.694Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-27T09:04:49.700Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-27T09:04:51.724Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-27T09:05:36.155Z"}
+{"level":"info","message":"product was updated successfully!","timestamp":"2019-03-27T09:05:39.754Z"}
+{"level":"info","message":"product_two was updated successfully!","timestamp":"2019-03-27T09:05:39.755Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-27T09:05:39.756Z"}
+{"level":"info","message":"Entries created successfully in product content type in en-us locale!","timestamp":"2019-03-27T09:05:44.271Z"}
+{"level":"info","message":"Entries created successfully in product_two content type in en-us locale!","timestamp":"2019-03-27T09:05:44.273Z"}
+{"level":"info","message":"Entries created successfully in 'en-us' language","timestamp":"2019-03-27T09:05:44.273Z"}
+{"level":"info","message":"No entries without mapped uid found!","timestamp":"2019-03-27T09:05:44.274Z"}
+{"level":"info","message":"Imported entries in 'en-us' language successfully!","timestamp":"2019-03-27T09:05:44.277Z"}
+{"level":"info","message":"Successfully imported 'en-us' entries!","timestamp":"2019-03-27T09:05:44.278Z"}
+{"level":"info","message":"Re-modified content type schemas to their original form!","timestamp":"2019-03-27T09:05:46.280Z"}
+{"level":"info","message":"The stack has been eradicated from bugged entries!","timestamp":"2019-03-27T09:05:46.283Z"}
+{"level":"info","message":"Entries imported successfully!","timestamp":"2019-03-27T09:05:46.283Z"}
+{"level":"info","message":"Import utility executed succesfully!","timestamp":"2019-03-27T09:05:46.284Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-27T09:35:53.264Z"}
+{"level":"info","message":"product was updated successfully!","timestamp":"2019-03-27T09:35:56.535Z"}
+{"level":"info","message":"product_two was updated successfully!","timestamp":"2019-03-27T09:35:57.464Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-27T09:35:57.465Z"}
+{"level":"info","message":"Entries created successfully in product content type in en-us locale!","timestamp":"2019-03-27T09:36:01.800Z"}
+{"level":"info","message":"Entries created successfully in product_two content type in en-us locale!","timestamp":"2019-03-27T09:36:01.801Z"}
+{"level":"info","message":"Entries created successfully in 'en-us' language","timestamp":"2019-03-27T09:36:01.801Z"}
+{"level":"info","message":"No entries without mapped uid found!","timestamp":"2019-03-27T09:36:01.802Z"}
+{"level":"info","message":"Imported entries in 'en-us' language successfully!","timestamp":"2019-03-27T09:36:01.805Z"}
+{"level":"info","message":"Successfully imported 'en-us' entries!","timestamp":"2019-03-27T09:36:01.806Z"}
+{"level":"info","message":"Re-modified content type schemas to their original form!","timestamp":"2019-03-27T09:36:03.448Z"}
+{"level":"info","message":"The stack has been eradicated from bugged entries!","timestamp":"2019-03-27T09:36:03.449Z"}
+{"level":"info","message":"Entries imported successfully!","timestamp":"2019-03-27T09:36:03.450Z"}
+{"level":"info","message":"Import utility executed succesfully!","timestamp":"2019-03-27T09:36:03.450Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-27T09:44:38.187Z"}
+{"level":"info","message":"product was updated successfully!","timestamp":"2019-03-27T09:44:41.500Z"}
+{"level":"info","message":"product_two was updated successfully!","timestamp":"2019-03-27T09:44:42.388Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-27T09:44:42.388Z"}
+{"level":"info","message":"Entries created successfully in product content type in en-us locale!","timestamp":"2019-03-27T09:44:46.528Z"}
+{"level":"info","message":"Entries created successfully in product_two content type in en-us locale!","timestamp":"2019-03-27T09:44:46.530Z"}
+{"level":"info","message":"Entries created successfully in 'en-us' language","timestamp":"2019-03-27T09:44:46.530Z"}
+{"level":"info","message":"No entries without mapped uid found!","timestamp":"2019-03-27T09:44:46.532Z"}
+{"level":"info","message":"Imported entries in 'en-us' language successfully!","timestamp":"2019-03-27T09:44:46.536Z"}
+{"level":"info","message":"Successfully imported 'en-us' entries!","timestamp":"2019-03-27T09:44:46.536Z"}
+{"level":"info","message":"Re-modified content type schemas to their original form!","timestamp":"2019-03-27T09:44:49.054Z"}
+{"level":"info","message":"The stack has been eradicated from bugged entries!","timestamp":"2019-03-27T09:44:49.055Z"}
+{"level":"info","message":"Entries imported successfully!","timestamp":"2019-03-27T09:44:49.055Z"}
+{"level":"info","message":"Import utility executed succesfully!","timestamp":"2019-03-27T09:44:49.056Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-27T09:57:09.660Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-27T09:58:00.052Z"}
+{"level":"info","message":"product_two was updated successfully!","timestamp":"2019-03-27T09:58:04.075Z"}
+{"level":"info","message":"product was updated successfully!","timestamp":"2019-03-27T09:58:04.246Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-27T09:58:04.247Z"}
+{"level":"info","message":"Entries created successfully in product content type in en-us locale!","timestamp":"2019-03-27T09:58:11.053Z"}
+{"level":"info","message":"Entries created successfully in product_two content type in en-us locale!","timestamp":"2019-03-27T09:58:11.054Z"}
+{"level":"info","message":"Entries created successfully in 'en-us' language","timestamp":"2019-03-27T09:58:11.055Z"}
+{"level":"info","message":"No entries without mapped uid found!","timestamp":"2019-03-27T09:58:11.055Z"}
+{"level":"info","message":"Imported entries in 'en-us' language successfully!","timestamp":"2019-03-27T09:58:11.058Z"}
+{"level":"info","message":"Successfully imported 'en-us' entries!","timestamp":"2019-03-27T09:58:11.058Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-27T10:05:18.672Z"}
+{"level":"info","message":"product_two was updated successfully!","timestamp":"2019-03-27T10:05:21.935Z"}
+{"level":"info","message":"product was updated successfully!","timestamp":"2019-03-27T10:05:21.988Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-27T10:05:21.989Z"}
+{"level":"info","message":"Entries created successfully in product content type in en-us locale!","timestamp":"2019-03-27T10:05:25.316Z"}
+{"level":"info","message":"Entries created successfully in product_two content type in en-us locale!","timestamp":"2019-03-27T10:05:25.317Z"}
+{"level":"info","message":"Entries created successfully in 'en-us' language","timestamp":"2019-03-27T10:05:25.318Z"}
+{"level":"info","message":"No entries without mapped uid found!","timestamp":"2019-03-27T10:05:25.319Z"}
+{"level":"info","message":"Imported entries in 'en-us' language successfully!","timestamp":"2019-03-27T10:05:25.321Z"}
+{"level":"info","message":"Successfully imported 'en-us' entries!","timestamp":"2019-03-27T10:05:25.322Z"}
+{"level":"info","message":"Content type: 'product_two' has been restored to its previous glory!","timestamp":"2019-03-27T10:05:26.945Z"}
+{"level":"info","message":"Content type: 'product' has been restored to its previous glory!","timestamp":"2019-03-27T10:05:26.974Z"}
+{"level":"info","message":"Re-modified content type schemas to their original form!","timestamp":"2019-03-27T10:05:26.976Z"}
+{"level":"info","message":"The stack has been eradicated from bugged entries!","timestamp":"2019-03-27T10:05:26.977Z"}
+{"level":"info","message":"Entries imported successfully!","timestamp":"2019-03-27T10:05:26.977Z"}
+{"level":"info","message":"Import utility executed succesfully!","timestamp":"2019-03-27T10:05:26.978Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-27T10:55:06.659Z"}
+{"level":"info","message":"product was updated successfully!","timestamp":"2019-03-27T10:55:10.006Z"}
+{"level":"info","message":"product_two was updated successfully!","timestamp":"2019-03-27T10:55:10.033Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-27T10:55:10.033Z"}
+{"level":"info","message":"Entries created successfully in product content type in en-us locale!","timestamp":"2019-03-27T10:55:15.505Z"}
+{"level":"info","message":"Entries created successfully in product_two content type in en-us locale!","timestamp":"2019-03-27T10:55:15.506Z"}
+{"level":"info","message":"Entries created successfully in 'en-us' language","timestamp":"2019-03-27T10:55:15.507Z"}
+{"level":"info","message":"No entries without mapped uid found!","timestamp":"2019-03-27T10:55:15.508Z"}
+{"level":"info","message":"Imported entries in 'en-us' language successfully!","timestamp":"2019-03-27T10:55:15.511Z"}
+{"level":"info","message":"Successfully imported 'en-us' entries!","timestamp":"2019-03-27T10:55:15.511Z"}
+{"level":"info","message":"Content type: 'product' has been restored to its previous glory!","timestamp":"2019-03-27T10:55:17.221Z"}
+{"level":"info","message":"Content type: 'product_two' has been restored to its previous glory!","timestamp":"2019-03-27T10:55:19.447Z"}
+{"level":"info","message":"Re-modified content type schemas to their original form!","timestamp":"2019-03-27T10:55:19.448Z"}
+{"level":"info","message":"The stack has been eradicated from bugged entries!","timestamp":"2019-03-27T10:55:19.451Z"}
+{"level":"info","message":"Entries imported successfully!","timestamp":"2019-03-27T10:55:19.451Z"}
+{"level":"info","message":"Import utility executed succesfully!","timestamp":"2019-03-27T10:55:19.452Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-27T11:01:42.437Z"}
+{"level":"info","message":"product was updated successfully!","timestamp":"2019-03-27T11:01:45.870Z"}
+{"level":"info","message":"product_two was updated successfully!","timestamp":"2019-03-27T11:01:46.668Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-27T11:01:46.668Z"}
+{"level":"info","message":"Entries created successfully in product content type in en-us locale!","timestamp":"2019-03-27T11:01:50.842Z"}
+{"level":"info","message":"Entries created successfully in product_two content type in en-us locale!","timestamp":"2019-03-27T11:01:50.844Z"}
+{"level":"info","message":"Entries created successfully in 'en-us' language","timestamp":"2019-03-27T11:01:50.844Z"}
+{"level":"info","message":"No entries without mapped uid found!","timestamp":"2019-03-27T11:01:50.845Z"}
+{"level":"info","message":"Imported entries in 'en-us' language successfully!","timestamp":"2019-03-27T11:01:50.848Z"}
+{"level":"info","message":"Successfully imported 'en-us' entries!","timestamp":"2019-03-27T11:01:50.848Z"}
+{"level":"info","message":"Content type: 'product' has been restored to its previous glory!","timestamp":"2019-03-27T11:01:52.582Z"}
+{"level":"info","message":"Content type: 'product_two' has been restored to its previous glory!","timestamp":"2019-03-27T11:01:53.424Z"}
+{"level":"info","message":"Re-modified content type schemas to their original form!","timestamp":"2019-03-27T11:01:53.425Z"}
+{"level":"info","message":"The stack has been eradicated from bugged entries!","timestamp":"2019-03-27T11:01:53.428Z"}
+{"level":"info","message":"Entries imported successfully!","timestamp":"2019-03-27T11:01:53.428Z"}
+{"level":"info","message":"Import utility executed succesfully!","timestamp":"2019-03-27T11:01:53.429Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-27T11:46:07.567Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-27T11:50:35.035Z"}
+{"level":"info","message":"product was updated successfully!","timestamp":"2019-03-27T11:50:38.440Z"}
+{"level":"info","message":"product_two was updated successfully!","timestamp":"2019-03-27T11:50:38.500Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-27T11:50:38.500Z"}
+{"level":"info","message":"Entries created successfully in product content type in en-us locale!","timestamp":"2019-03-27T11:50:42.673Z"}
+{"level":"info","message":"Entries created successfully in product_two content type in en-us locale!","timestamp":"2019-03-27T11:50:42.674Z"}
+{"level":"info","message":"Entries created successfully in 'en-us' language","timestamp":"2019-03-27T11:50:42.675Z"}
+{"level":"info","message":"No entries without mapped uid found!","timestamp":"2019-03-27T11:50:42.675Z"}
+{"level":"info","message":"Imported entries in 'en-us' language successfully!","timestamp":"2019-03-27T11:50:42.678Z"}
+{"level":"info","message":"Successfully imported 'en-us' entries!","timestamp":"2019-03-27T11:50:42.678Z"}
+{"level":"info","message":"Content type: 'product' has been restored to its previous glory!","timestamp":"2019-03-27T11:50:44.351Z"}
+{"level":"info","message":"Content type: 'product_two' has been restored to its previous glory!","timestamp":"2019-03-27T11:50:44.399Z"}
+{"level":"info","message":"Re-modified content type schemas to their original form!","timestamp":"2019-03-27T11:50:44.400Z"}
+{"level":"info","message":"The stack has been eradicated from bugged entries!","timestamp":"2019-03-27T11:50:44.404Z"}
+{"level":"info","message":"Entries imported successfully!","timestamp":"2019-03-27T11:50:44.404Z"}
+{"level":"info","message":"Import utility executed succesfully!","timestamp":"2019-03-27T11:50:44.405Z"}
+{"level":"info","message":"No folders were found at: /home/rohit/Test-import-export/contentstack-import/_backup_912/assets/folders.json","timestamp":"2019-03-27T12:14:24.662Z"}
+{"level":"info","message":"Completed asset import of batch no: 1","timestamp":"2019-03-27T12:14:29.451Z"}
+{"level":"info","message":"Completed asset import of batch no: 3","timestamp":"2019-03-27T12:14:31.795Z"}
+{"level":"info","message":"Completed asset import of batch no: 2","timestamp":"2019-03-27T12:14:33.880Z"}
+{"level":"info","message":"Asset import completed successfully!","timestamp":"2019-03-27T12:14:33.880Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-27T12:14:33.883Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-27T12:14:36.423Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-27T12:14:39.761Z"}
+{"level":"info","message":"product was updated successfully!","timestamp":"2019-03-27T12:14:43.340Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-27T12:14:43.340Z"}
+{"level":"info","message":"No folders were found at: /home/rohit/Test-import-export/contentstack-import/_backup_483/assets/folders.json","timestamp":"2019-03-27T12:16:50.485Z"}
+{"level":"info","message":"Completed asset import of batch no: 1","timestamp":"2019-03-27T12:16:52.772Z"}
+{"level":"info","message":"Completed asset import of batch no: 3","timestamp":"2019-03-27T12:16:54.986Z"}
+{"level":"info","message":"Completed asset import of batch no: 2","timestamp":"2019-03-27T12:16:57.087Z"}
+{"level":"info","message":"Asset import completed successfully!","timestamp":"2019-03-27T12:16:57.088Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-27T12:16:57.092Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-27T12:16:58.730Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-27T12:17:02.096Z"}
+{"level":"info","message":"No folders were found at: /home/rohit/Test-import-export/contentstack-import/_backup_952/assets/folders.json","timestamp":"2019-03-27T12:17:55.528Z"}
+{"level":"info","message":"Completed asset import of batch no: 1","timestamp":"2019-03-27T12:17:57.776Z"}
+{"level":"info","message":"Completed asset import of batch no: 3","timestamp":"2019-03-27T12:18:00.032Z"}
+{"level":"info","message":"Completed asset import of batch no: 2","timestamp":"2019-03-27T12:18:02.077Z"}
+{"level":"info","message":"Asset import completed successfully!","timestamp":"2019-03-27T12:18:02.077Z"}
+{"level":"info","message":"Languages have been imported successfully!","timestamp":"2019-03-27T12:18:02.082Z"}
+{"level":"info","message":"Environments have been imported successfully!","timestamp":"2019-03-27T12:18:03.724Z"}
+{"level":"info","message":"Extensions have been imported successfully!","timestamp":"2019-03-27T12:18:07.667Z"}
+{"level":"info","message":"product_two was updated successfully!","timestamp":"2019-03-27T12:18:11.104Z"}
+{"level":"info","message":"product was updated successfully!","timestamp":"2019-03-27T12:18:11.111Z"}
+{"level":"info","message":"Content types have been imported successfully!","timestamp":"2019-03-27T12:18:11.111Z"}
+{"level":"info","message":"Entries created successfully in product content type in en-us locale!","timestamp":"2019-03-27T12:18:14.718Z"}
+{"level":"info","message":"Entries created successfully in product_two content type in en-us locale!","timestamp":"2019-03-27T12:18:14.720Z"}
+{"level":"info","message":"Entries created successfully in 'en-us' language","timestamp":"2019-03-27T12:18:14.720Z"}
+{"level":"info","message":"No entries without mapped uid found!","timestamp":"2019-03-27T12:18:14.720Z"}
+{"level":"info","message":"Imported entries in 'en-us' language successfully!","timestamp":"2019-03-27T12:18:14.722Z"}
+{"level":"info","message":"Successfully imported 'en-us' entries!","timestamp":"2019-03-27T12:18:14.722Z"}
+{"level":"info","message":"Content type: 'product_two' has been restored to its previous glory!","timestamp":"2019-03-27T12:18:16.374Z"}
+{"level":"info","message":"Content type: 'product' has been restored to its previous glory!","timestamp":"2019-03-27T12:18:16.453Z"}
+{"level":"info","message":"Re-modified content type schemas to their original form!","timestamp":"2019-03-27T12:18:16.454Z"}
+{"level":"info","message":"The stack has been eradicated from bugged entries!","timestamp":"2019-03-27T12:18:16.456Z"}
+{"level":"info","message":"Entries imported successfully!","timestamp":"2019-03-27T12:18:16.457Z"}
+{"level":"info","message":"Import utility executed succesfully!","timestamp":"2019-03-27T12:18:16.457Z"}
