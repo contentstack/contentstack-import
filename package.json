@@ -1,10 +1,10 @@
 {
   "name": "contentstack-import",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Import data into Contentstack",
-  "homepage": "https://www.contentstack.com/",
+  "homepage": "https://www.contentstack.com/docs/tools-and-frameworks/content-migration/within-contentstack",
   "author": {
-    "name": "Contentstack Ecosystem",
+    "name": "Contentstack LLC <support@contentstack.com>",
     "url": "https://www.contentstack.com/"
   },
   "license": "MIT",
@@ -15,7 +15,11 @@
     "ncp": "^2.0.0",
     "request": "^2.45.0",
     "winston": "^2.2.0",
-    "marked": "*"
+    "marked": "*",
+    "debug": "4.1.0"
+  },
+  "engines": {
+    "node": ">=6"
   },
   "main": "app.js",
   "maintainers": [
@@ -30,7 +34,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/builtio-contentstack/contentstack-import"
+    "url": "https://github.com/contentstack/contentstack-import"
+  },
+  "bugs": {
+    "url": "https://github.com/contentstack/contentstack-import/issues"
   },
   "scripts": {
     "import": "node app.js",
@@ -40,8 +47,12 @@
     "import-locales": "node app.js locales",
     "import-env": "node app.js environments"
   },
+  "keywords": [
+    "contentstack",
+    "migration-utility",
+    "stack-backup"
+  ],
   "devDependencies": {
-    "debug": "4.1.0",
     "eslint": "5.9.0"
   }
 }

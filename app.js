@@ -53,7 +53,6 @@ login(config).then(function () {
         log.success('Import utility executed succesfully!');
         return;
       }).catch(function (error) {
-        console.error(error)
         log.error('Import utility failed while executing');
         log.error(error);
         return;
