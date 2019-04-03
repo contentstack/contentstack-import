@@ -23,6 +23,7 @@ exports.getConfig = function () {
 
 login(config).then(function () {
   var migrationBackupDirPath = path.join(process.cwd(), '_backup_' + Math.floor((Math.random() * 1000)));
+  console.log("firstttt", migrationBackupDirPath)
   return createBackup(migrationBackupDirPath).then(function (pth) {
     config.data = pth;
     var types = config.modules.types;
@@ -69,16 +70,28 @@ login(config).then(function () {
 });
 
 function createBackup(backupDirPath) {
+  console.log("second", backupDirPath);
   return new Promise(function (resolve, reject) {
     if (config.hasOwnProperty('useBackedupDir') && fs.existsSync(path.join(__dirname, config.useBackedupDir))) {
       return resolve(config.useBackedupDir);
     }
     ncp.limit = config.backupConcurrency || 16;
+    if(path.isAbsolute(config.data)) {
+      return ncp(config.data, backupDirPath, function (error) {
+        if (error) {
+          return reject(error);
+        }
+        return resolve(backupDirPath);
+      });
+      
+  } else {
     return ncp(path.join(__dirname, config.data), backupDirPath, function (error) {
       if (error) {
         return reject(error);
       }
       return resolve(backupDirPath);
     });
+  }
+    
   });
 }
