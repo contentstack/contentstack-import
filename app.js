@@ -73,11 +73,22 @@ function createBackup(backupDirPath) {
       return resolve(config.useBackedupDir);
     }
     ncp.limit = config.backupConcurrency || 16;
+    if(path.isAbsolute(config.data)) {
+      return ncp(config.data, backupDirPath, function (error) {
+        if (error) {
+          return reject(error);
+        }
+        return resolve(backupDirPath);
+      });
+      
+  } else {
     return ncp(path.join(__dirname, config.data), backupDirPath, function (error) {
       if (error) {
         return reject(error);
       }
       return resolve(backupDirPath);
     });
+  }
+    
   });
 }
