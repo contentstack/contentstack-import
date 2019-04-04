@@ -1,57 +1,59 @@
-# Built.io Contentstack import tool
+# Contentstack import utility
 
-Built.io Contentstack is a headless CMS with an API-first approach that puts content at the centre. It is designed to simplify the process of publication by separating code from content.
+Contentstack is a headless CMS with an API-first approach that puts content at the centre. It is designed to simplify the process of publication by separating code from content.
 
-This tool helps you to import content which is exported using contentstack-export utility into another stack. 
+This tool helps you to import content which is exported using [contentstack-export](https://github.com/contentstack/contentstack-export) utility into another stack. 
 
 ## Installation
-
 Download this project and install all the modules using following command.
 
 ```bash
-npm install
+$ npm install
 ```
 
 ## Configuration
+Update configuration details at config/index.js
 
-Update configuration details at config/index.json :
-
+```js
+{
+ master_locale: {
+  name: '', // Stack's master locale. ex: 'English - United States'
+  code: ''  // Stack master locale's code. ex: 'en-us'
+ },
+ email: '', // Your registered email id
+ password: '', // Account password
+ target_stack: '', // Stack api_key. This is the stack, where the data will be imported
+ data: '' // The data that's to be exported. This is generally the one exported via the contentstack-export utility. ex: '../contentstack-export/contents'. Kindly provide the relative path to the directory
 ```
-"base_locale":{"name": <<YOUR MASTER LOCALE NAME>>, "code":<<YOUR MASTER LOCALE CODE>>}
-"email": <<YOUR EMAIL ADDRESS>>
-"password" : <<PASSWORD>>
-"source_stack" : <<SOURCE_STACK_API_KEY>>
-"target_stack" : <<TARGET_STACK_API_KEY>>
-"data": <<FOLDER PATH WHERE DATA IS EXPORTED>>
-  ```
-  
+
 ## Usage
-  
-Once all things are configured, you have to run following commands:
-  
-### Import all the modules :
+Once all things are configured, you can run following commands
 
-  ```
-  npm run import 
-  ```
-  
-### Import specific module :
-  
+1. Import all modules [ assets, locales, environments, content_types, entries ]
+```bash
+$ npm run import
 ```
-  npm run import <<module name>>
- ```
- 
- Module names and sequence can be as follows:
- 1. assets
- 2. environments
- 3. locales
- 4. contentTypes
- 5. entries
- 
-Note: Before importing entries, you must have to import locales, assets and content types.
+
+2. Import a specific module
+```bash
+$ npm run import-assets
+$ npm run import-locales
+$ npm run import-env
+$ npm run import-contenttypes
+$ npm run import-entries
+```
+> Note: Before importing entries you must have to import locales, assets and content types.
 
 ### Known issues
 * It will migrate only latest published version of entry.
+* Does not support the following
+  * Roles
+  * Users
+  * Releases
+  * Extensions
+  * Webhook
+  * Workflow
+* If 2 different versions of the same asset have the same file name, only the 1st version will be imported
 
 ## License
 This project is licensed under MIT license

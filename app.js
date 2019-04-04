@@ -1,51 +1,94 @@
-var createClient    = require('./libs/utils/create-client'),
-    sequence         = require('when/sequence');
+/*!
+* Contentstack Import
+* Copyright (c) 2019 Contentstack LLC
+* MIT Licensed
+*/
 
-global.config = require('./config');
+var ncp = require('ncp');
+var Bluebird = require('bluebird');
+var fs = require('fs');
+var path = require('path');
 
-global.errorLogger = require("./libs/utils/logger.js")("error").error;
-global.successLogger = require("./libs/utils/logger.js")("success").log;
-global.warnLogger = require("./libs/utils/logger.js")("warn").log;
+var util = require('./lib/util');
+var login = require('./lib/util/login');
+var log = require('./lib/util/log');
+var config = require('./config');
 
-createClient(config, function(client) {
-    global.client = client;
-    var modulesList = ['assets','locales','environments','contentTypes','entries'];
-    var _import = [];
-    var migrateLocalized  = config.migrateLocalized;
-    if(process.argv.length == 3) {
-        var val = process.argv[2];
-        if(val && modulesList.indexOf(val) > -1){
-            var ModuleExport = require('./libs/import/' + val + '.js');
-            var moduleExport = new ModuleExport(migrateLocalized);
-            _import.push(function(){
-                return moduleExport.start() ;
-            })
-        } else {
-            errorLogger("Please provide valid module name.");
-            return 0;
-        }
-    } else if(process.argv.length==2){
-        for(var i = 0, total = modulesList.length; i < total; i++) {
-            var ModuleExport = require('./libs/import/' + modulesList[i] + '.js');
-            var moduleExport = new ModuleExport(migrateLocalized);
-            _import.push(function(moduleExport){
-                return function(){ return moduleExport.start() } ;
-            }(moduleExport));
-        }
-    } else {
-        errorLogger("Only one module can be exported at a time.");
+config = util.buildAppConfig(config);
+util.validateConfig(config);
+
+exports.getConfig = function () {
+  return config;
+};
+
+login(config).then(function () {
+  var migrationBackupDirPath = path.join(process.cwd(), '_backup_' + Math.floor((Math.random() * 1000)));
+  return createBackup(migrationBackupDirPath).then(function (pth) {
+    config.data = pth;
+    var types = config.modules.types;
+
+    if (process.argv.length === 3) {
+      var val = process.argv[2];
+      if (val && types.indexOf(val) > -1) {
+        var moduleImport = require('./lib/import/' + val);
+        return moduleImport.start().then(function () {
+          log.success(val + ' was imported successfully!');
+          return;
+        }).catch(function (error) {
+          log.error('Failed to import ' + val);
+          log.error(error);
+          return;
+        });
+      } else {
+        log.error('Please provide valid module name.');
         return 0;
+      }
+    } else if (process.argv.length === 2) {
+      var counter = 0;
+      return Bluebird.map(types, function () {
+        var importModule = require('./lib/import/' + types[counter]);
+        counter++;
+        return importModule.start();
+      }, { concurrency: 1}).then(function () {
+        log.success('Import utility executed succesfully!');
+        return;
+      }).catch(function (error) {
+        log.error('Import utility failed while executing');
+        log.error(error);
+        return;
+      });
+    } else {
+      log.error('Only one module can be exported at a time.');
+      return 0;
     }
-
-    var taskResults = sequence(_import);
-
-    taskResults
-    .then(function(results) {
-        successLogger('Import has been done. Please check logs at "libs/utils/logs" in case of failure.');
-    })
-    .catch(function(error){
-        errorLogger(error);
-    });
-
+  }).catch(function (error) {
+    log.error(error);
+    process.exit(1);
+  });
 });
 
+function createBackup(backupDirPath) {
+  return new Promise(function (resolve, reject) {
+    if (config.hasOwnProperty('useBackedupDir') && fs.existsSync(path.join(__dirname, config.useBackedupDir))) {
+      return resolve(config.useBackedupDir);
+    }
+    ncp.limit = config.backupConcurrency || 16;
+    if(path.isAbsolute(config.data)) {
+      return ncp(config.data, backupDirPath, function (error) {
+        if (error) {
+          return reject(error);
+        }
+        return resolve(backupDirPath);
+      });
+      
+  } else {
+    return ncp(path.join(__dirname, config.data), backupDirPath, function (error) {
+      if (error) {
+        return reject(error);
+      }
+      return resolve(backupDirPath);
+    });
+  }
+    
+  });
+}

@@ -1,12 +1,5 @@
-.idea/
-.idea/*
-_logs/
-_logs/*
-.git/
-.git/*
-data/
-data/*
-node_modules/
-node_modules/*
-libs/utils/logs/
-libs/utils/logs/*
+package-lock.json
+node_modules
+logs
+contents
+npm-debug.log
