@@ -53,7 +53,6 @@ login(config).then(function () {
         log.success('Import utility executed succesfully!');
         return;
       }).catch(function (error) {
-        console.error(error)
         log.error('Import utility failed while executing');
         log.error(error);
         return;
@@ -74,11 +73,22 @@ function createBackup(backupDirPath) {
       return resolve(config.useBackedupDir);
     }
     ncp.limit = config.backupConcurrency || 16;
+    if(path.isAbsolute(config.data)) {
+      return ncp(config.data, backupDirPath, function (error) {
+        if (error) {
+          return reject(error);
+        }
+        return resolve(backupDirPath);
+      });
+      
+  } else {
     return ncp(path.join(__dirname, config.data), backupDirPath, function (error) {
       if (error) {
         return reject(error);
       }
       return resolve(backupDirPath);
     });
+  }
+    
   });
 }
