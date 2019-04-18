@@ -50,8 +50,6 @@ $ npm run import-entries
   * Roles
   * Users
   * Releases
-  * Extensions
-  * Webhook
   * Workflow
 * If 2 different versions of the same asset have the same file name, only the 1st version will be imported
 
