@@ -50,7 +50,8 @@
     "import-contenttypes": "node app.js content_types",
     "import-locales": "node app.js locales",
     "import-env": "node app.js environments",
-    "import-web": "node app.js webhooks"
+    "import-web": "node app.js webhooks",
+    "import-ext": "node app.js extensions"
   },
   "keywords": [
     "contentstack",
