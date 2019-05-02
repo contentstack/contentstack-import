@@ -49,7 +49,8 @@
     "import-entries": "node app.js entries",
     "import-contenttypes": "node app.js content_types",
     "import-locales": "node app.js locales",
-    "import-env": "node app.js environments"
+    "import-env": "node app.js environments",
+    "import-ext": "node app.js extensions"
   },
   "keywords": [
     "contentstack",
