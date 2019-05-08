@@ -1,10 +1,5 @@
 package-lock.json
 node_modules
-<<<<<<< HEAD
-contents
-contents_old
-=======
 logs
 contents
 npm-debug.log
->>>>>>> 3e96cd354cda8aa51eb93202fb52ac6466387d96
