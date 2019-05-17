@@ -4,9 +4,9 @@ module.exports = {
     name: 'English - United States',
     code: 'en-us'
   },
-  email: '<EMAIL_ID>',
-  password: '<PASSWORD>',
-  target_stack: '<API_KEY>',
+  email: '',
+  password: '',
+  target_stack: '',
   // Folder in which exported contents are stored
-  data: './contents'
+  data: '../contentstack-export/contents'
 };

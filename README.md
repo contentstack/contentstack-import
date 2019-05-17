@@ -39,6 +39,8 @@ $ npm run import
 $ npm run import-assets
 $ npm run import-locales
 $ npm run import-env
+$ npm run import-extensions
+$ npm run import-webhooks
 $ npm run import-contenttypes
 $ npm run import-entries
 ```
