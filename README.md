@@ -39,6 +39,8 @@ $ npm run import
 $ npm run import-assets
 $ npm run import-locales
 $ npm run import-env
+$ npm run import-extensions
+$ npm run import-webhooks
 $ npm run import-contenttypes
 $ npm run import-entries
 ```
@@ -50,8 +52,6 @@ $ npm run import-entries
   * Roles
   * Users
   * Releases
-  * Extensions
-  * Webhook
   * Workflow
 * If 2 different versions of the same asset have the same file name, only the 1st version will be imported
 

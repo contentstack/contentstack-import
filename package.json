@@ -1,6 +1,6 @@
 {
   "name": "contentstack-import",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Import data into Contentstack",
   "homepage": "https://www.contentstack.com/docs/tools-and-frameworks/content-migration/within-contentstack",
   "author": {
@@ -49,7 +49,9 @@
     "import-entries": "node app.js entries",
     "import-contenttypes": "node app.js content_types",
     "import-locales": "node app.js locales",
-    "import-env": "node app.js environments"
+    "import-env": "node app.js environments",
+    "import-webhooks": "node app.js webhooks",
+    "import-extensions": "node app.js extensions"
   },
   "keywords": [
     "contentstack",

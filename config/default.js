@@ -9,6 +9,8 @@ module.exports = {
       'assets',
       'locales',
       'environments',
+      'extensions',
+      'webhooks',
       'content_types',
       'entries'
     ],
@@ -21,9 +23,17 @@ module.exports = {
         'name'
       ]
     },
-    environments: {
+    environments: {  
       dirName: 'environments',
       fileName: 'environments.json'
+    },
+    extensions: {
+      dirName: 'extensions',
+      fileName: 'extensions.json'
+    },
+    webhooks: {
+      dirName: 'webhooks',
+      fileName: 'webhooks.json'
     },
     assets: {
       dirName: 'assets',
@@ -63,7 +73,8 @@ module.exports = {
         '_metadata',
         'published'
       ],
-      limit: 50
+      limit: 50,
+      assetBatchLimit: 5
     }
   },
   apis: {
@@ -73,6 +84,8 @@ module.exports = {
     assets: '/assets/',
     content_types: '/content_types/',
     entries: '/entries/',
+    extensions: '/extensions/',
+    webhooks: '/webhooks/',
     folders: '/folders/'
   }
   // if exisstingContentDir exists, no backup folder will be created
