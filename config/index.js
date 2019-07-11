@@ -8,5 +8,5 @@ module.exports = {
   password: '',
   target_stack: '',
   // Folder in which exported contents are stored
-  data: '../contentstack-export/contents-multiple'
+  data: './contents'
 };

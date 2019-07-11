@@ -87,10 +87,10 @@ module.exports = {
     extensions: '/extensions/',
     webhooks: '/webhooks/',
     folders: '/folders/'
-  }
+  },
   // if exisstingContentDir exists, no backup folder will be created
   // rather, its value(path) will be used instead
-  // useBackedupDir: './_backup_694',
+   useBackedupDir: './_backup_727',
   // is the no. of files to be copied/backed up concurrently
   // backupConcurrency: 10,
 };
