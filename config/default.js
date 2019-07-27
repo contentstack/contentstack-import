@@ -3,7 +3,7 @@ module.exports = {
   // pass locale, only to migrate entries from that locale
   // not passing `locale` will migrate all the locales present
   // locales: ['fr-fr'],
-  host: 'https://dev-new-api.contentstack.io/v3',
+  host: 'https://api.contentstack.io/v3',
   modules: {
     types: [
       'assets',
@@ -90,7 +90,7 @@ module.exports = {
   },
   // if exisstingContentDir exists, no backup folder will be created
   // rather, its value(path) will be used instead
-   useBackedupDir: './_backup_727',
+   //useBackedupDir: './_backup_727',
   // is the no. of files to be copied/backed up concurrently
   // backupConcurrency: 10,
 };
