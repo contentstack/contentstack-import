@@ -30,7 +30,6 @@ login(config).then(function () {
     if (process.argv.length === 3) {
       var val = process.argv[2];
       if (val && types.indexOf(val) > -1) {
-        console.log("valueeeee", val)
         var moduleImport = require('./lib/import/' + val);
         return moduleImport.start().then(function () {
           log.success(val + ' was imported successfully!');
