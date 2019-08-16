@@ -46,7 +46,7 @@ $ npm run import-entries
 ```
 > Note: Before importing entries you must have to import locales, assets and content types.
 
-### Known issues
+### Known Limitations and Issues
 * It will migrate only latest published version of entry.
 * Does not support the following
   * Roles
