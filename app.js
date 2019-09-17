@@ -9,7 +9,7 @@ var Bluebird = require('bluebird');
 var fs = require('fs');
 var path = require('path');
 
-var util = require('./lib/util');
+var util = require('./lib/util/index');
 var login = require('./lib/util/login');
 var log = require('./lib/util/log');
 var config = require('./config');
@@ -21,10 +21,14 @@ exports.getConfig = function () {
   return config;
 };
 
-login(config).then(function () {
+login(config)
+.then(function () {
   var migrationBackupDirPath = path.join(process.cwd(), '_backup_' + Math.floor((Math.random() * 1000)));
-  return createBackup(migrationBackupDirPath).then(function (pth) {
-    config.data = pth;
+  return createBackup(migrationBackupDirPath).then((basePath) => {
+    config.data = basePath;
+    return util.sanitizeStack(config);
+  })
+  .then(() => {
     var types = config.modules.types;
 
     if (process.argv.length === 3) {

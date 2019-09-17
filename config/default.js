@@ -75,6 +75,10 @@ module.exports = {
       ],
       limit: 50,
       assetBatchLimit: 5
+    },
+    stack: {
+      dirName: 'stack',
+      fileName: 'stack.json'
     }
   },
   apis: {
@@ -86,11 +90,13 @@ module.exports = {
     entries: '/entries/',
     extensions: '/extensions/',
     webhooks: '/webhooks/',
-    folders: '/folders/'
+    folders: '/folders/',
+    stacks: '/stacks/'
   },
+  keepOldStackFormat: false
   // if exisstingContentDir exists, no backup folder will be created
   // rather, its value(path) will be used instead
-   //useBackedupDir: './_backup_727',
+  // useBackedupDir: './_backup_727',
   // is the no. of files to be copied/backed up concurrently
   // backupConcurrency: 10,
 };
