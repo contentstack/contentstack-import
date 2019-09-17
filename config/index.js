@@ -9,4 +9,5 @@ module.exports = {
   target_stack: '',
   // Folder in which exported contents are stored
   data: '../contentstack-export/_contents',
+  // preserveStackVersion: true
 };
