@@ -3,14 +3,15 @@ module.exports = {
   // pass locale, only to migrate entries from that locale
   // not passing `locale` will migrate all the locales present
   // locales: ['fr-fr'],
-  host: 'https://api.contentstack.io/v3',
+  host: 'https://dev6-app.contentstack.com/v3',
   modules: {
     types: [
+      'snippets',
       'assets',
       'locales',
       'environments',
       'extensions',
-      'webhooks',
+     // 'webhooks',
       'content_types',
       'entries'
     ],
@@ -75,7 +76,12 @@ module.exports = {
       ],
       limit: 50,
       assetBatchLimit: 5
-    }
+    },
+
+    snippets: {
+      dirName: 'snippets',
+      fileName: 'snippets.json'
+    },
   },
   apis: {
     userSession: '/user-session/',
@@ -86,11 +92,12 @@ module.exports = {
     entries: '/entries/',
     extensions: '/extensions/',
     webhooks: '/webhooks/',
+    snippets: '/content_types_snippets/',
     folders: '/folders/'
   },
   // if exisstingContentDir exists, no backup folder will be created
   // rather, its value(path) will be used instead
-   //useBackedupDir: './_backup_727',
+  // useBackedupDir: './_backup_805',
   // is the no. of files to be copied/backed up concurrently
   // backupConcurrency: 10,
 };
