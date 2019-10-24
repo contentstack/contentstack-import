@@ -6,12 +6,12 @@ module.exports = {
   host: 'https://dev6-app.contentstack.com/v3',
   modules: {
     types: [
-      'snippets',
+      'globalfields',
       'assets',
       'locales',
       'environments',
       'extensions',
-     // 'webhooks',
+      'webhooks',
       'content_types',
       'entries'
     ],
@@ -78,9 +78,9 @@ module.exports = {
       assetBatchLimit: 5
     },
 
-    snippets: {
-      dirName: 'snippets',
-      fileName: 'snippets.json'
+    globalfields: {
+      dirName: 'globalfields',
+      fileName: 'globalfields.json'
     },
   },
   apis: {
@@ -92,12 +92,12 @@ module.exports = {
     entries: '/entries/',
     extensions: '/extensions/',
     webhooks: '/webhooks/',
-    snippets: '/content_types_snippets/',
+    globalfields: '/content_types_snippets/',
     folders: '/folders/'
   },
   // if exisstingContentDir exists, no backup folder will be created
   // rather, its value(path) will be used instead
-  // useBackedupDir: './_backup_805',
+  // useBackedupDir: './_backup_133',
   // is the no. of files to be copied/backed up concurrently
   // backupConcurrency: 10,
 };
