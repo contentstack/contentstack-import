@@ -92,7 +92,7 @@ module.exports = {
     entries: '/entries/',
     extensions: '/extensions/',
     webhooks: '/webhooks/',
-    globalfields: '/content_types_snippets/',
+    globalfields: '/global_fields/',
     folders: '/folders/'
   },
   // if exisstingContentDir exists, no backup folder will be created
