@@ -6,12 +6,12 @@ module.exports = {
   host: 'https://dev6-app.contentstack.com/v3',
   modules: {
     types: [
-      'globalfields',
       'assets',
       'locales',
       'environments',
       'extensions',
       'webhooks',
+      'globalfields',
       'content_types',
       'entries'
     ],
@@ -97,7 +97,7 @@ module.exports = {
   },
   // if exisstingContentDir exists, no backup folder will be created
   // rather, its value(path) will be used instead
-  // useBackedupDir: './_backup_133',
+ //  useBackedupDir: './_backup_240',
   // is the no. of files to be copied/backed up concurrently
   // backupConcurrency: 10,
 };

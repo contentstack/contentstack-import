@@ -50,6 +50,7 @@
     "import-contenttypes": "node app.js content_types",
     "import-locales": "node app.js locales",
     "import-env": "node app.js environments",
+    "import-globalfields": "node app.js globalfields",
     "import-webhooks": "node app.js webhooks",
     "import-extensions": "node app.js extensions"
   },
