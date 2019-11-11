@@ -97,7 +97,7 @@ module.exports = {
   },
   // if exisstingContentDir exists, no backup folder will be created
   // rather, its value(path) will be used instead
- //  useBackedupDir: './_backup_240',
+  // useBackedupDir: './_backup_340',
   // is the no. of files to be copied/backed up concurrently
   // backupConcurrency: 10,
 };
