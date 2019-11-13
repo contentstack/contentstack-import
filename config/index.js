@@ -4,10 +4,10 @@ module.exports = {
     name: 'English - United States',
     code: 'en-us'
   },
-   // Credentials
-   email: '',
-   password: '',
+  // Credentials
+  email: '',
+  password: '',
   target_stack: '',
   // Folder in which exported contents are stored
-  data: '../contentstack-export/_contents_new'
+  data: '../contentstack-export/_contents'
 };

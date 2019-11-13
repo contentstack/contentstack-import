@@ -3,7 +3,7 @@ module.exports = {
   // pass locale, only to migrate entries from that locale
   // not passing `locale` will migrate all the locales present
   // locales: ['fr-fr'],
-  host: 'https://stag-app.contentstack.com/v3',
+  host: 'https://app.contentstack.com/v3',
   modules: {
     types: [
       'assets',
@@ -80,7 +80,16 @@ module.exports = {
 
     globalfields: {
       dirName: 'global_fields',
-      fileName: 'globalfields.json'
+      fileName: 'globalfields.json',
+      validKeys: [
+        'title',
+        'uid',
+        'schema',
+        'options',
+        'singleton',
+        'description'
+      ],
+      limit: 100
     },
   },
   apis: {
