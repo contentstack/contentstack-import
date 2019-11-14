@@ -3,7 +3,7 @@ module.exports = {
   // pass locale, only to migrate entries from that locale
   // not passing `locale` will migrate all the locales present
   // locales: ['fr-fr'],
-  host: 'https://app.contentstack.com/v3',
+  host: 'https://stag-app.contentstack.com/v3',
   modules: {
     types: [
       'assets',
@@ -91,6 +91,10 @@ module.exports = {
       ],
       limit: 100
     },
+    stack: {
+      dirName: 'stack',
+      fileName: 'stack.json'
+    }
   },
   apis: {
     userSession: '/user-session/',
@@ -102,8 +106,10 @@ module.exports = {
     extensions: '/extensions/',
     webhooks: '/webhooks/',
     globalfields: '/global_fields/',
-    folders: '/folders/'
+    folders: '/folders/',
+    stacks: '/stacks/'
   },
+  preserveStackVersion: false
   // if exisstingContentDir exists, no backup folder will be created
   // rather, its value(path) will be used instead
   // useBackedupDir: './_backup_340',

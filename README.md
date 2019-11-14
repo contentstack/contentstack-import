@@ -29,7 +29,7 @@ Update configuration details at config/index.js
 ## Usage
 Once all things are configured, you can run following commands
 
-1. Import all modules [ assets, locales, environments, content_types, entries ]
+1. Import all modules [ assets, locales, environments, extensions, webhooks, global_fields, content_types, entries ]
 ```bash
 $ npm run import
 ```
