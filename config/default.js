@@ -3,7 +3,7 @@ module.exports = {
   // pass locale, only to migrate entries from that locale
   // not passing `locale` will migrate all the locales present
   // locales: ['fr-fr'],
-  host: 'https://app.contentstack.com/v3',
+  host: 'https://api.contentstack.io/v3',
   modules: {
     types: [
       'assets',
