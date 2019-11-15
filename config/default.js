@@ -11,6 +11,7 @@ module.exports = {
       'environments',
       'extensions',
       'webhooks',
+      'global_fields',
       'content_types',
       'entries'
     ],
@@ -76,6 +77,20 @@ module.exports = {
       limit: 50,
       assetBatchLimit: 5
     },
+
+    globalfields: {
+      dirName: 'global_fields',
+      fileName: 'globalfields.json',
+      validKeys: [
+        'title',
+        'uid',
+        'schema',
+        'options',
+        'singleton',
+        'description'
+      ],
+      limit: 100
+    },
     stack: {
       dirName: 'stack',
       fileName: 'stack.json'
@@ -90,13 +105,14 @@ module.exports = {
     entries: '/entries/',
     extensions: '/extensions/',
     webhooks: '/webhooks/',
+    globalfields: '/global_fields/',
     folders: '/folders/',
     stacks: '/stacks/'
   },
   preserveStackVersion: false
   // if exisstingContentDir exists, no backup folder will be created
   // rather, its value(path) will be used instead
-  // useBackedupDir: './_backup_007',
+  // useBackedupDir: './_backup_340',
   // is the no. of files to be copied/backed up concurrently
   // backupConcurrency: 10,
 };
