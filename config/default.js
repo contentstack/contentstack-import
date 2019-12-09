@@ -6,14 +6,14 @@ module.exports = {
   host: 'https://api.contentstack.io/v3',
   modules: {
     types: [
-      'assets',
-      'locales',
-      'environments',
-      'extensions',
-      'webhooks',
-      'global_fields',
-      'content_types',
-      'entries',
+      // 'assets',
+      // 'locales',
+      // 'environments',
+      // 'extensions',
+      // 'webhooks',
+      // 'global_fields',
+      // 'content_types',
+      // 'entries',
       'labels'
     ],
     locales: {
