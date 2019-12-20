@@ -29,7 +29,7 @@ Update configuration details at config/index.js
 ## Usage
 Once all things are configured, you can run following commands
 
-1. Import all modules [ assets, locales, environments, extensions, webhooks, global_fields, content_types, entries ]
+1. Import all modules [ assets, locales, environments, extensions, webhooks, global_fields, content_types, entries, labels ]
 ```bash
 $ npm run import
 ```
@@ -44,6 +44,8 @@ $ npm run import-webhooks
 $ npm run import-globalfields
 $ npm run import-contenttypes
 $ npm run import-entries
+$ npm run import-labels
+
 ```
 > Note: Before importing entries you must have to import locales, assets and content types.
 
