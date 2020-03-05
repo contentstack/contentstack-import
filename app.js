@@ -12,9 +12,7 @@ var path = require('path');
 var login = require('./lib/util/login');
 var util = require('./lib/util/index');
 var log = require('./lib/util/log');
-var {getConfig} = require('./lib/util/configMerge');
-var config = getConfig();
-
+var config = util.getConfig();
 
 login(config)
   .then(function () {
