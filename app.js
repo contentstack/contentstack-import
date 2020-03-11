@@ -9,17 +9,10 @@ var Bluebird = require('bluebird');
 var fs = require('fs');
 var path = require('path');
 
-var util = require('./lib/util/index');
 var login = require('./lib/util/login');
+var util = require('./lib/util/index');
 var log = require('./lib/util/log');
-var config = require('./config');
-
-config = util.buildAppConfig(config);
-util.validateConfig(config);
-
-exports.getConfig = function () {
-  return config;
-};
+var config = util.getConfig();
 
 login(config)
   .then(function () {
@@ -59,7 +52,7 @@ login(config)
             log.success('Import utility executed succesfully!');
             return;
           }).catch(function (error) {
-            console.error(error)
+            console.error(error);
             log.error('Import utility failed while executing');
             log.error(error);
             return;
