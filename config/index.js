@@ -5,9 +5,9 @@ module.exports = {
     code: 'en-us'
   },
   // Credentials
-  email: '',
-  password: '',
-  target_stack: '',
+  email: 'rohit.mishra@contentstack.com',
+  password: 'contentstack!@#321',
+  target_stack: 'bltb368d90d5bc390ca',
   // Folder in which exported contents are stored
-  data: './contents'
+  data: './New-data'
 };
