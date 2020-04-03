@@ -121,5 +121,5 @@ module.exports = {
   // useBackedupDir: './_backup_413',
   // is the no. of files to be copied/backed up concurrently
   // backupConcurrency: 10,
-  concurrency: 3
+  concurrency: 1
 };
