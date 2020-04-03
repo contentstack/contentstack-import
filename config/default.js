@@ -1,5 +1,5 @@
 module.exports = {
-  versioning: true,
+  versioning: false,
   // pass locale, only to migrate entries from that locale
   // not passing `locale` will migrate all the locales present
   // locales: ['fr-fr'],
