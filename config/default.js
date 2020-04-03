@@ -115,10 +115,11 @@ module.exports = {
     stacks: '/stacks/',
     labels: '/labels/'
   },
-  preserveStackVersion: false
+  preserveStackVersion: false,
   // if exisstingContentDir exists, no backup folder will be created
   // rather, its value(path) will be used instead
   // useBackedupDir: './_backup_413',
   // is the no. of files to be copied/backed up concurrently
   // backupConcurrency: 10,
+  concurrency: 3
 };
