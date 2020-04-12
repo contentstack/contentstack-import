@@ -12,6 +12,7 @@ var path = require('path');
 var login = require('./lib/util/login');
 var util = require('./lib/util/index');
 var log = require('./lib/util/log');
+
 var config = util.getConfig();
 
 login(config)
@@ -52,7 +53,6 @@ login(config)
             log.success('Import utility executed succesfully!');
             return;
           }).catch(function (error) {
-            console.error(error);
             log.error('Import utility failed while executing');
             log.error(error);
             return;
