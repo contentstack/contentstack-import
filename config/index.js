@@ -8,6 +8,7 @@ module.exports = {
   email: '',
   password: '',
   target_stack: '',
+  management_token: '',
   // Folder in which exported contents are stored
   data: './contents'
 };
