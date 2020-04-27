@@ -23,6 +23,7 @@ Update configuration details at config/index.js
  email: '', // Your registered email id
  password: '', // Account password
  target_stack: '', // Stack api_key. This is the stack, where the data will be imported
+ management_token: '' //Stack management_token
  data: '' // The data that's to be exported. This is generally the one exported via the contentstack-export utility. ex: '../contentstack-export/contents'. Kindly provide the relative path to the directory
 ```
 
@@ -48,6 +49,7 @@ $ npm run import-labels
 
 ```
 > Note: Before importing entries you must have to import locales, assets and content types.
+> Note: If you keep the value of preserveStackVersion to true, then you will have to provide the email and password mandatorily in the config file, the management token will not work in that case
 
 ### Known Limitations and Issues
 * It will migrate only latest published version of entry.
