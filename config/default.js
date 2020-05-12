@@ -116,9 +116,9 @@ module.exports = {
     labels: '/labels/'
   },
   preserveStackVersion: false,
-  entriesPublish: false,
+  entriesPublish: true,
   concurrency: 1
- // , useBackedupDir: './_backup_724'
+  // , useBackedupDir: './_backup_878'
   // is the no. of files to be copied/backed up concurrently
   // backupConcurrency: 10,
 };
