@@ -6,12 +6,12 @@ module.exports = {
   host: 'https://api.contentstack.io/v3',
   modules: {
     types: [
-      'assets',
       'locales',
       'environments',
       'extensions',
       'webhooks',
       'global_fields',
+      'assets',
       'content_types',
       'entries',
       'labels'
@@ -116,8 +116,9 @@ module.exports = {
     labels: '/labels/'
   },
   preserveStackVersion: false,
+  entriesPublish: false,
   concurrency: 1
-// , useBackedupDir: './_backup_38'
+  // , useBackedupDir: './_backup_878'
   // is the no. of files to be copied/backed up concurrently
   // backupConcurrency: 10,
 };

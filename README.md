@@ -37,12 +37,12 @@ $ npm run import
 
 2. Import a specific module
 ```bash
-$ npm run import-assets
 $ npm run import-locales
 $ npm run import-env
 $ npm run import-extensions
 $ npm run import-webhooks
 $ npm run import-globalfields
+$ npm run import-assets
 $ npm run import-contenttypes
 $ npm run import-entries
 $ npm run import-labels
