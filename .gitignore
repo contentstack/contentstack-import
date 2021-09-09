@@ -4,3 +4,4 @@ logs
 contents
 npm-debug.log
 _backup
+.vscode
