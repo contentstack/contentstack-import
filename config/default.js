@@ -4,6 +4,8 @@ module.exports = {
   // not passing `locale` will migrate all the locales present
   // locales: ['fr-fr'],
   host: 'https://api.contentstack.io/v3',
+  // use below hosts for eu region
+  // host:'https://eu-api.contentstack.com/v3',
   modules: {
     types: [
       'locales',
@@ -47,6 +49,8 @@ module.exports = {
       // This is the total no. of asset objects fetched in each 'get assets' call
       limit: 100,
       host: 'https://api.contentstack.io',
+      // use below hosts for eu region
+      // host:'https://eu-api.contentstack.com',
       validKeys: [
         'uid',
         'filename',
