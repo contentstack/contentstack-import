@@ -26,7 +26,14 @@ Update configuration details at config/index.js
  management_token: '' //Stack management_token
  data: '' // The data that's to be exported. This is generally the one exported via the contentstack-export utility. ex: '../contentstack-export/contents'. Kindly provide the relative path to the directory
 ```
+For switching to EU region update the hosts at config/default.js
 
+```js
+{
+  host:'https://eu-api.contentstack.com/v3',
+ ...
+}
+``` 
 ## Usage
 Once all things are configured, you can run following commands
 
