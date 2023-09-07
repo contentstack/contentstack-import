@@ -9,7 +9,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "bluebird": "3.5.1",
+    "bluebird": "3.7.2",
     "debug": "4.1.0",
     "lodash": "4.17.15",
     "marked": "0.7.0",
