@@ -13,7 +13,7 @@
     "debug": "4.1.0",
     "lodash": "4.17.15",
     "marked": "0.7.0",
-    "mkdirp": "0.5.1",
+    "mkdirp": "1.0.4",
     "ncp": "2.0.0",
     "request": "2.88.0",
     "winston": "2.2.0"
