@@ -1,6 +1,6 @@
 {
   "name": "contentstack-import",
-  "version": "1.7.7",
+  "version": "1.7.8",
   "description": "Import data into Contentstack",
   "homepage": "https://www.contentstack.com/docs/tools-and-frameworks/content-migration/within-contentstack",
   "author": {
@@ -9,11 +9,11 @@
   },
   "license": "MIT",
   "dependencies": {
-    "bluebird": "3.5.1",
-    "debug": "4.1.0",
-    "lodash": "4.17.15",
-    "marked": "0.7.0",
-    "mkdirp": "0.5.1",
+    "bluebird": "3.7.2",
+    "debug": "4.3.1",
+    "lodash": "4.17.21",
+    "marked": "^13.0.1",
+    "mkdirp": "1.0.4",
     "ncp": "2.0.0",
     "request": "2.88.0",
     "winston": "2.2.0"

@@ -1,5 +1,7 @@
 # Contentstack import utility
 
+**Note**: The contentstack-import command-line utility will soon be deprecated. We recommend you to check out our latest [CLI documentation](https://www.contentstack.com/docs/developers/cli) for performing content management activities.
+
 Contentstack is a headless CMS with an API-first approach that puts content at the centre. It is designed to simplify the process of publication by separating code from content.
 
 This tool helps you to import content which is exported using [contentstack-export](https://github.com/contentstack/contentstack-export) utility into another stack. 
