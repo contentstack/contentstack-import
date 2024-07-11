@@ -15,6 +15,12 @@ var log = require('./lib/util/log');
 const conf = require('./config/default');
 
 var config = util.initialization();
+
+function isValid(input) {
+  const regex = /^[a-zA-Z0-9_]+$/;
+  return regex.test(input);
+}
+
 if(config && config !== undefined) {
   login(config)
     .then(function () {
@@ -28,7 +34,7 @@ if(config && config !== undefined) {
 
           if (process.argv.length === 3) {
             var val = process.argv[2];
-            if (val && types.indexOf(val) > -1) {
+            if (isValid(val) && val && types.indexOf(val) > -1) {
               if(conf.modules.types.includes(val)){
                 var moduleImport = require('./lib/import/' + conf.modules.types.includes(val)?val:'');
                 return moduleImport.start().then(function () {
