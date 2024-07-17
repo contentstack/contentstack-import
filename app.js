@@ -12,8 +12,15 @@ var path = require('path');
 var login = require('./lib/util/login');
 var util = require('./lib/util/index');
 var log = require('./lib/util/log');
+const conf = require('./config/default');
 
 var config = util.initialization();
+
+function isValid(input) {
+  const regex = /^[a-zA-Z0-9_]+$/;
+  return regex.test(input);
+}
+
 if(config && config !== undefined) {
   login(config)
     .then(function () {
@@ -27,16 +34,18 @@ if(config && config !== undefined) {
 
           if (process.argv.length === 3) {
             var val = process.argv[2];
-            if (val && types.indexOf(val) > -1) {
-              var moduleImport = require('./lib/import/' + val);
-              return moduleImport.start().then(function () {
-                log.success(val + ' was imported successfully!');
-                return;
-              }).catch(function (error) {
-                log.error('Failed to import ' + val);
-                log.error(error);
-                return;
-              });
+            if (isValid(val) && val && types.indexOf(val) > -1) {
+              if(conf.modules.types.includes(val)){
+                var moduleImport = require('./lib/import/' + conf.modules.types.includes(val)?val:'');
+                return moduleImport.start().then(function () {
+                  log.success(val + ' was imported successfully!');
+                  return;
+                }).catch(function (error) {
+                  log.error('Failed to import ' + val);
+                  log.error(error);
+                  return;
+                });
+              }
             } else {
               log.error('Please provide valid module name.');
               return 0;
