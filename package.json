@@ -16,7 +16,7 @@
     "mkdirp": "1.0.4",
     "ncp": "2.0.0",
     "request": "2.88.0",
-    "winston": "2.2.0"
+    "winston": "3.8.1"
   },
   "engines": {
     "node": ">=6"
